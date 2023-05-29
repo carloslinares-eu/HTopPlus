@@ -1,3 +1,0 @@
-/home/carloslinares-eu/Dev/HTopPlus/build/CMakeFiles/monitor.dir
-/home/carloslinares-eu/Dev/HTopPlus/build/CMakeFiles/edit_cache.dir
-/home/carloslinares-eu/Dev/HTopPlus/build/CMakeFiles/rebuild_cache.dir
