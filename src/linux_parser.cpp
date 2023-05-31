@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <charconv>
 
 #include "linux_parser.h"
 
@@ -79,7 +80,26 @@ float LinuxParser::MemoryUtilization() {
 }
 
 // TODO: Read and return the system uptime
-long LinuxParser::UpTime() { return 0; }
+long int LinuxParser::UpTime() {
+    string line;
+    long int uptime_effective;
+    long int uptime_total;
+    // TODO: Create a function that reads a file an returns all words in a vector of vectors.
+    std::ifstream stream (kProcDirectory + kUptimeFilename);
+    if (stream.is_open()) {
+        std::getline(stream, line);
+        std::istringstream line_stream (line);
+        std::vector<std::string> words_in_line;
+        std::string word;
+
+        while (line_stream >> word){
+            words_in_line.push_back(word);
+        }
+        std::from_chars(words_in_line[0].data(), words_in_line[0].data() + words_in_line[0].size(), uptime_total);
+        std::from_chars(words_in_line[1].data(), words_in_line[1].data() + words_in_line[1].size(), uptime_effective);
+    }
+    return uptime_total;
+}
 
 // TODO: Read and return the number of jiffies for the system
 long LinuxParser::Jiffies() { return 0; }
