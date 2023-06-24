@@ -33,3 +33,4 @@
 
 # CMake Build folder
 cmake-build-debug/
+build/
