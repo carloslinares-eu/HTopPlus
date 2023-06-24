@@ -44,10 +44,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /home/carloslinares/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/bin/cmake
+CMAKE_COMMAND = /home/carloslinares/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9161.40/bin/cmake/linux/x64/bin/cmake
 
 # The command to remove a file.
-RM = /home/carloslinares/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9011.31/bin/cmake/linux/x64/bin/cmake -E rm -f
+RM = /home/carloslinares/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/231.9161.40/bin/cmake/linux/x64/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -111,10 +111,24 @@ CMakeFiles/monitor.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/monitor.dir/src/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /data/robin/dev/htopplus/src/main.cpp -o CMakeFiles/monitor.dir/src/main.cpp.s
 
+CMakeFiles/monitor.dir/src/memory.cpp.o: CMakeFiles/monitor.dir/flags.make
+CMakeFiles/monitor.dir/src/memory.cpp.o: /data/robin/dev/htopplus/src/memory.cpp
+CMakeFiles/monitor.dir/src/memory.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/monitor.dir/src/memory.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/memory.cpp.o -MF CMakeFiles/monitor.dir/src/memory.cpp.o.d -o CMakeFiles/monitor.dir/src/memory.cpp.o -c /data/robin/dev/htopplus/src/memory.cpp
+
+CMakeFiles/monitor.dir/src/memory.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/monitor.dir/src/memory.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /data/robin/dev/htopplus/src/memory.cpp > CMakeFiles/monitor.dir/src/memory.cpp.i
+
+CMakeFiles/monitor.dir/src/memory.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/monitor.dir/src/memory.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /data/robin/dev/htopplus/src/memory.cpp -o CMakeFiles/monitor.dir/src/memory.cpp.s
+
 CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: /data/robin/dev/htopplus/src/ncurses_display.cpp
 CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/monitor.dir/src/ncurses_display.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/monitor.dir/src/ncurses_display.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/ncurses_display.cpp.o -MF CMakeFiles/monitor.dir/src/ncurses_display.cpp.o.d -o CMakeFiles/monitor.dir/src/ncurses_display.cpp.o -c /data/robin/dev/htopplus/src/ncurses_display.cpp
 
 CMakeFiles/monitor.dir/src/ncurses_display.cpp.i: cmake_force
@@ -128,7 +142,7 @@ CMakeFiles/monitor.dir/src/ncurses_display.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/process.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/process.cpp.o: /data/robin/dev/htopplus/src/process.cpp
 CMakeFiles/monitor.dir/src/process.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/monitor.dir/src/process.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/monitor.dir/src/process.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/process.cpp.o -MF CMakeFiles/monitor.dir/src/process.cpp.o.d -o CMakeFiles/monitor.dir/src/process.cpp.o -c /data/robin/dev/htopplus/src/process.cpp
 
 CMakeFiles/monitor.dir/src/process.cpp.i: cmake_force
@@ -142,7 +156,7 @@ CMakeFiles/monitor.dir/src/process.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/processor.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/processor.cpp.o: /data/robin/dev/htopplus/src/processor.cpp
 CMakeFiles/monitor.dir/src/processor.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/monitor.dir/src/processor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/monitor.dir/src/processor.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/processor.cpp.o -MF CMakeFiles/monitor.dir/src/processor.cpp.o.d -o CMakeFiles/monitor.dir/src/processor.cpp.o -c /data/robin/dev/htopplus/src/processor.cpp
 
 CMakeFiles/monitor.dir/src/processor.cpp.i: cmake_force
@@ -156,7 +170,7 @@ CMakeFiles/monitor.dir/src/processor.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/system.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/system.cpp.o: /data/robin/dev/htopplus/src/system.cpp
 CMakeFiles/monitor.dir/src/system.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/monitor.dir/src/system.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/monitor.dir/src/system.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/system.cpp.o -MF CMakeFiles/monitor.dir/src/system.cpp.o.d -o CMakeFiles/monitor.dir/src/system.cpp.o -c /data/robin/dev/htopplus/src/system.cpp
 
 CMakeFiles/monitor.dir/src/system.cpp.i: cmake_force
@@ -172,6 +186,7 @@ monitor_OBJECTS = \
 "CMakeFiles/monitor.dir/src/format.cpp.o" \
 "CMakeFiles/monitor.dir/src/linux_parser.cpp.o" \
 "CMakeFiles/monitor.dir/src/main.cpp.o" \
+"CMakeFiles/monitor.dir/src/memory.cpp.o" \
 "CMakeFiles/monitor.dir/src/ncurses_display.cpp.o" \
 "CMakeFiles/monitor.dir/src/process.cpp.o" \
 "CMakeFiles/monitor.dir/src/processor.cpp.o" \
@@ -183,6 +198,7 @@ monitor_EXTERNAL_OBJECTS =
 monitor: CMakeFiles/monitor.dir/src/format.cpp.o
 monitor: CMakeFiles/monitor.dir/src/linux_parser.cpp.o
 monitor: CMakeFiles/monitor.dir/src/main.cpp.o
+monitor: CMakeFiles/monitor.dir/src/memory.cpp.o
 monitor: CMakeFiles/monitor.dir/src/ncurses_display.cpp.o
 monitor: CMakeFiles/monitor.dir/src/process.cpp.o
 monitor: CMakeFiles/monitor.dir/src/processor.cpp.o
@@ -191,7 +207,7 @@ monitor: CMakeFiles/monitor.dir/build.make
 monitor: /usr/lib64/libcurses.so
 monitor: /usr/lib64/libform.so
 monitor: CMakeFiles/monitor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable monitor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable monitor"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/monitor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

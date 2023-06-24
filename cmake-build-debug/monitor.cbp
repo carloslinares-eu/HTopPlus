@@ -82,6 +82,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/data/robin/dev/htopplus/include/memory.h">
+			<Option target="monitor"/>
+		</Unit>
 		<Unit filename="/data/robin/dev/htopplus/src/format.cpp">
 			<Option target="monitor"/>
 		</Unit>
@@ -89,6 +92,9 @@
 			<Option target="monitor"/>
 		</Unit>
 		<Unit filename="/data/robin/dev/htopplus/src/main.cpp">
+			<Option target="monitor"/>
+		</Unit>
+		<Unit filename="/data/robin/dev/htopplus/src/memory.cpp">
 			<Option target="monitor"/>
 		</Unit>
 		<Unit filename="/data/robin/dev/htopplus/src/ncurses_display.cpp">
