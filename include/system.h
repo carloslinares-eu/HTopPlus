@@ -12,6 +12,7 @@ using std::vector;
 
 class System {
  public:
+    System();
   Processor& Cpu();                             // TODO: See src/system.cpp
   vector<Process>& Processes();            // TODO: See src/system.cpp
   static float MemoryUtilization();             // TODO: See src/system.cpp
@@ -37,15 +38,15 @@ class System {
   Processor cpu_ = {};
   vector<Process> processes_ = {};
 
-  vector<vector<string>> kCmdlineFile;
-  vector<vector<string>> kCpuInfoFile;
-  vector<vector<string>> kStatusFile;
-  vector<vector<string>> kStatFile;
-  vector<vector<string>> kUptimeFile;
-  vector<vector<string>> kMemInfoFile;
+  static vector<vector<string>> kCmdlineFile;
+  static vector<vector<string>> kCpuInfoFile;
+  static vector<vector<string>> kStatusFile;
+  static vector<vector<string>> kStatFile;
+  static vector<vector<string>> kUptimeFile;
+  static vector<vector<string>> kMemInfoFile;
   static vector<vector<string>> kVersionFile;
-  vector<vector<string>> kOSFile;
-  vector<vector<string>> kPasswordFile;
+  static vector<vector<string>> kOSFile;
+  static vector<vector<string>> kPasswordFile;
 
 };
 

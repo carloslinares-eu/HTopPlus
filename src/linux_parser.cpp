@@ -1,12 +1,7 @@
-
 #include "linux_parser.h"
 
 
-using std::stof;
-using std::to_string;
-
-
-string LinuxParser::OperatingSystem(System& system) {
+string LinuxParser::OperatingSystem(const vector<vector<string>>& kOSFile) {
   string line;
   string key;
   string value;
@@ -28,7 +23,7 @@ string LinuxParser::OperatingSystem(System& system) {
   return value;
 }
 
-string LinuxParser::Kernel(vector<vector<string>>& kVersionFile) {
+string LinuxParser::Kernel(const vector<vector<string>>& kVersionFile) {
     return kVersionFile[0][2];
 }
 
