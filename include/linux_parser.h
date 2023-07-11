@@ -40,8 +40,8 @@ long UpTime(vector<vector<string>>& system);
 std::vector<int> Pids();
 int TotalProcesses(vector<vector<string>>& system);
 int RunningProcesses(vector<vector<string>>& system);
-string Kernel(const vector<vector<string>>& kVersionFile);
-string OperatingSystem(const vector<vector<string>>& kOSFile);
+string Kernel(const vector<vector<string>>& kVersionFileRef);
+string OperatingSystem(const vector<vector<string>>& kOSFileRef);
 
 // CPU
 enum CPUStates {
