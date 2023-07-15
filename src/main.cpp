@@ -2,6 +2,6 @@
 #include "system.h"
 
 int main() {
-  System system(<#initializer#>);
+  System system;
   NCursesDisplay::Display(system);
 }

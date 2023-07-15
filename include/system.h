@@ -21,18 +21,7 @@ class System {
     int RunningProcesses();
     string Kernel();
     string OperatingSystem();
-
-  void ReadSystemFiles();
-
-  vector<vector<string>>& getKCmdlineFile(){return kCmdlineFile;}
-  vector<vector<string>>& getKCpuInfoFile(){return kCpuInfoFile;};
-  vector<vector<string>>& getKStatusFile(){return kStatusFile;}
-  vector<vector<string>>& getKStatFile(){return kStatFile;}
-  vector<vector<string>>& getKUptimeFile(){return kUptimeFile;}
-  vector<vector<string>>& getKMemInfoFile(){return kMemInfoFile;}
-  vector<vector<string>>& getKVersionFile(){return kVersionFile;}
-  vector<vector<string>>& getKOSFile(){return kOSFile;}
-  vector<vector<string>>& getKPasswordFile(){return kPasswordFile;}
+    void ReadSystemFiles();
 
  private:
   Processor cpu_ = {};
@@ -45,7 +34,8 @@ class System {
    vector<vector<string>> kUptimeFile;
    vector<vector<string>> kMemInfoFile;
    vector<vector<string>> kVersionFile;
-   vector<vector<string>> kOSFile;
+   vector<vector<string>> kOSFileRaw;
+   vector<vector<string>> kOSFileParsed;
    vector<vector<string>> kPasswordFile;
 
 };
