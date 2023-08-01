@@ -13,43 +13,52 @@ using std::string;
 using std::vector;
 
 
+System::System()  {
+    ReadSystemFiles();
+    previous_to_update_system_uptime = this->UpTime();
+    current_system_uptime = previous_to_update_system_uptime;
+    time_elapsed_since_update = 0;
+}
+
+void System::Running() {
+    ReadSystemFiles();
+    UpdateTiming();
+}
+
 void System::ReadSystemFiles(){
     kCmdlineFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kCmdlineFilename);
     kCpuInfoFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kCpuInfoFilename);
     kStatusFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kStatusFilename);
-    kStatFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kStatFilename);
+    kCpuStatFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kStatFilename);
     kUptimeFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kUptimeFilename);
     kMemInfoFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kMemInfoFilename);
     kVersionFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kVersionFilename);
     kPasswordFile = LinuxParser::ReadTextFile(LinuxParser::kPasswordPath);
     kOSFileRaw = LinuxParser::ReadTextFile(LinuxParser::kOSPath);
+
     kOSFileParsed = LinuxParser::ParseOSFile(kOSFileRaw);
 }
 
-// TODO: Return the system's CPU
 Processor& System::Cpu() { return cpu_; }
 
-// TODO: Return a container composed of the system's processes
 vector<Process>& System::Processes() { return processes_; }
 
 string System::Kernel() { return LinuxParser::Kernel(kVersionFile); }
 
-// TODO: Return the system's memory utilization
 float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(kMemInfoFile);}
 
 std::string System::OperatingSystem() { return LinuxParser::OperatingSystem(kOSFileParsed); }
 
-// TODO: Return the number of processes actively running on the system
-int System::RunningProcesses() { return LinuxParser::RunningProcesses(kStatFile); }
+int System::RunningProcesses() { return LinuxParser::RunningProcesses(kCpuStatFile); }
 
-// TODO: Return the total number of processes on the system
-int System::TotalProcesses() { return LinuxParser::TotalProcesses(kStatFile); }
+int System::TotalProcesses() { return LinuxParser::TotalProcesses(kCpuStatFile); }
 
-// TODO: Return the number of seconds since the system started running
 long int System::UpTime() { return LinuxParser::UpTimeTotal(kUptimeFile); }
 
-// TODO: Create system constructor to initialize variables defined by value
-System::System()  {
-    ReadSystemFiles();
+void System::UpdateTiming(){
+    current_system_uptime = this->UpTime();
+    time_elapsed_since_update = static_cast<int>(current_system_uptime - previous_to_update_system_uptime);
+    if (time_elapsed_since_update >= update_time_seconds) {
+        previous_to_update_system_uptime = current_system_uptime;
+    }
 }
-

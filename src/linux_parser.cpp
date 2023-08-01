@@ -63,7 +63,7 @@ float LinuxParser::MemoryUtilization(const vector<vector<string>>& kMemInfoFile)
     return memory_utilization;
 }
 
-long int LinuxParser::UpTimeTotal(const vector<vector<string>>& kUptimeFile) {
+long int LinuxParser:: UpTimeTotal(const vector<vector<string>>& kUptimeFile) {
     long int uptime_total;
     string uptime_total_s = kUptimeFile[0][0];
     std::from_chars(uptime_total_s.data(), uptime_total_s.data() + uptime_total_s.size(), uptime_total);
@@ -140,7 +140,7 @@ string LinuxParser::User(int pid[[maybe_unused]]) { return {}; }
 long LinuxParser::UpTime(int pid[[maybe_unused]]) { return 0; }
 
 
-// Generic functions to avoid reading the same files multiple times during runtime
+// Generic functions to follow the DRY principle
 vector<vector<string>> LinuxParser::ReadTextFile(const string& file_path) {
     vector<vector<string>> read_file;
     ifstream file_stream (file_path);

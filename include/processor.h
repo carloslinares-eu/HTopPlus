@@ -9,12 +9,15 @@ using std::vector;
 
 class Processor {
  public:
-   float Utilization();  // TODO: See src/processor.cpp
+   float Utilization();
 
   // TODO: Declare any necessary private members
  private:
+
     void GetSystemJiffies(const vector<vector<string>>& kStatFile);
-    long system_jiffies;
+    long int system_jiffies;
+    long int previous_cycle_utilization;
+    long int current_cycle_utilization;
 };
 
 #endif
