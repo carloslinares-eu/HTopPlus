@@ -28,6 +28,7 @@ class System {
   Processor cpu_ = {};
   vector<Process> processes_ = {};
 
+  // TODO: To be included in the system files.
    vector<vector<string>> kCmdlineFile;
    vector<vector<string>> kCpuInfoFile;
    vector<vector<string>> kStatusFile;
