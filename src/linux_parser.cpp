@@ -63,7 +63,7 @@ float LinuxParser::MemoryUtilization(const vector<vector<string>>& kMemInfoFile)
     return memory_utilization;
 }
 
-long int LinuxParser::UpTimeTotal(const vector<vector<string>>& kUptimeFile) {
+long int LinuxParser:: UpTimeTotal(const vector<vector<string>>& kUptimeFile) {
     long int uptime_total;
     string uptime_total_s = kUptimeFile[0][0];
     std::from_chars(uptime_total_s.data(), uptime_total_s.data() + uptime_total_s.size(), uptime_total);
@@ -78,21 +78,35 @@ long int LinuxParser::UpTimeTotal(const vector<vector<string>>& kUptimeFile) {
 }
 
 long LinuxParser::Jiffies(const vector<vector<string>>& kStatFile) {
-    int system_jiffies;
+    long system_jiffies;
     string user = kStatFile[0][1];
-    system_jiffies = std::stoi(user);
+    system_jiffies = std::stol(user);
     return system_jiffies;
 }
+
+
+std::vector<long int> LinuxParser::getAggregatedCPUInfo(const vector<vector<string>>& kStatFile) {
+    std::vector<long int> all_cpus_jiffies;
+    for (const string& jiffies_value: kStatFile[0]) {
+        if (jiffies_value == "cpu") {
+            continue;
+        }
+        long int jiffies_numeric = std::stol(jiffies_value);
+        all_cpus_jiffies.push_back(jiffies_numeric);
+    }
+    return all_cpus_jiffies;
+}
+
 
 // TODO: Read and return the number of active jiffies for a PID
 // REMOVE: [[maybe_unused]] once you define the function
 long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) { return 0; }
 
 // TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies() { return 0; }
+long LinuxParser::ActiveJiffies(const vector<vector<string>>& kStatFile) { return 0; }
 
 // TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies() { return 0; }
+long LinuxParser::IdleJiffies(const vector<vector<string>>& kStatFile) { return 0; }
 
 // TODO: Read and return CPU utilization
 vector<string> LinuxParser::CpuUtilization() { return {}; }
@@ -140,7 +154,7 @@ string LinuxParser::User(int pid[[maybe_unused]]) { return {}; }
 long LinuxParser::UpTime(int pid[[maybe_unused]]) { return 0; }
 
 
-// Generic functions to avoid reading the same files multiple times during runtime
+// Generic functions to follow the DRY principle
 vector<vector<string>> LinuxParser::ReadTextFile(const string& file_path) {
     vector<vector<string>> read_file;
     ifstream file_stream (file_path);

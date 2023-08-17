@@ -82,9 +82,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/data/robin/dev/htopplus/include/memory.h">
-			<Option target="monitor"/>
-		</Unit>
 		<Unit filename="/data/robin/dev/htopplus/src/format.cpp">
 			<Option target="monitor"/>
 		</Unit>
@@ -107,6 +104,9 @@
 			<Option target="monitor"/>
 		</Unit>
 		<Unit filename="/data/robin/dev/htopplus/src/system.cpp">
+			<Option target="monitor"/>
+		</Unit>
+		<Unit filename="/data/robin/dev/htopplus/src/system_files.cpp">
 			<Option target="monitor"/>
 		</Unit>
 		<Unit filename="/data/robin/dev/htopplus/CMakeLists.txt">

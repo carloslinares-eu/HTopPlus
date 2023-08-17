@@ -15,6 +15,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/monitor.dir/src/processor.cpp.o.d"
   "CMakeFiles/monitor.dir/src/system.cpp.o"
   "CMakeFiles/monitor.dir/src/system.cpp.o.d"
+  "CMakeFiles/monitor.dir/src/system_files.cpp.o"
+  "CMakeFiles/monitor.dir/src/system_files.cpp.o.d"
   "monitor"
   "monitor.pdb"
 )

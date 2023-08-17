@@ -321,6 +321,30 @@ src/system.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system.cpp.s
 .PHONY : src/system.cpp.s
 
+src/system_files.o: src/system_files.cpp.o
+.PHONY : src/system_files.o
+
+# target to build an object file
+src/system_files.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system_files.cpp.o
+.PHONY : src/system_files.cpp.o
+
+src/system_files.i: src/system_files.cpp.i
+.PHONY : src/system_files.i
+
+# target to preprocess a source file
+src/system_files.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system_files.cpp.i
+.PHONY : src/system_files.cpp.i
+
+src/system_files.s: src/system_files.cpp.s
+.PHONY : src/system_files.s
+
+# target to generate assembly for a file
+src/system_files.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/monitor.dir/build.make CMakeFiles/monitor.dir/src/system_files.cpp.s
+.PHONY : src/system_files.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -354,6 +378,9 @@ help:
 	@echo "... src/system.o"
 	@echo "... src/system.i"
 	@echo "... src/system.s"
+	@echo "... src/system_files.o"
+	@echo "... src/system_files.i"
+	@echo "... src/system_files.s"
 .PHONY : help
 
 

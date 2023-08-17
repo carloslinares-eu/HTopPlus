@@ -102,7 +102,7 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process>& processes,
     init_pair(2, COLOR_GREEN, COLOR_BLACK);
     box(system_window, 0, 0);
     box(process_window, 0, 0);
-    system.ReadSystemFiles();
+    system.Running();
     DisplaySystem(system, system_window);
     DisplayProcesses(system.Processes(), process_window, n);
     wrefresh(system_window);
