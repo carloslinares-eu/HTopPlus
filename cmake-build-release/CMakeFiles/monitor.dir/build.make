@@ -56,7 +56,7 @@ EQUALS = =
 CMAKE_SOURCE_DIR = /data/robin/dev/htopplus
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /data/robin/dev/htopplus/cmake-build-debug
+CMAKE_BINARY_DIR = /data/robin/dev/htopplus/cmake-build-release
 
 # Include any dependencies generated for this target.
 include CMakeFiles/monitor.dir/depend.make
@@ -72,7 +72,7 @@ include CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/format.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/format.cpp.o: /data/robin/dev/htopplus/src/format.cpp
 CMakeFiles/monitor.dir/src/format.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/monitor.dir/src/format.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/monitor.dir/src/format.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/format.cpp.o -MF CMakeFiles/monitor.dir/src/format.cpp.o.d -o CMakeFiles/monitor.dir/src/format.cpp.o -c /data/robin/dev/htopplus/src/format.cpp
 
 CMakeFiles/monitor.dir/src/format.cpp.i: cmake_force
@@ -86,7 +86,7 @@ CMakeFiles/monitor.dir/src/format.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/linux_parser.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/linux_parser.cpp.o: /data/robin/dev/htopplus/src/linux_parser.cpp
 CMakeFiles/monitor.dir/src/linux_parser.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/monitor.dir/src/linux_parser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/monitor.dir/src/linux_parser.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/linux_parser.cpp.o -MF CMakeFiles/monitor.dir/src/linux_parser.cpp.o.d -o CMakeFiles/monitor.dir/src/linux_parser.cpp.o -c /data/robin/dev/htopplus/src/linux_parser.cpp
 
 CMakeFiles/monitor.dir/src/linux_parser.cpp.i: cmake_force
@@ -100,7 +100,7 @@ CMakeFiles/monitor.dir/src/linux_parser.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/main.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/main.cpp.o: /data/robin/dev/htopplus/src/main.cpp
 CMakeFiles/monitor.dir/src/main.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/monitor.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/monitor.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/main.cpp.o -MF CMakeFiles/monitor.dir/src/main.cpp.o.d -o CMakeFiles/monitor.dir/src/main.cpp.o -c /data/robin/dev/htopplus/src/main.cpp
 
 CMakeFiles/monitor.dir/src/main.cpp.i: cmake_force
@@ -114,7 +114,7 @@ CMakeFiles/monitor.dir/src/main.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/memory.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/memory.cpp.o: /data/robin/dev/htopplus/src/memory.cpp
 CMakeFiles/monitor.dir/src/memory.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/monitor.dir/src/memory.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/monitor.dir/src/memory.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/memory.cpp.o -MF CMakeFiles/monitor.dir/src/memory.cpp.o.d -o CMakeFiles/monitor.dir/src/memory.cpp.o -c /data/robin/dev/htopplus/src/memory.cpp
 
 CMakeFiles/monitor.dir/src/memory.cpp.i: cmake_force
@@ -128,7 +128,7 @@ CMakeFiles/monitor.dir/src/memory.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: /data/robin/dev/htopplus/src/ncurses_display.cpp
 CMakeFiles/monitor.dir/src/ncurses_display.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/monitor.dir/src/ncurses_display.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/monitor.dir/src/ncurses_display.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/ncurses_display.cpp.o -MF CMakeFiles/monitor.dir/src/ncurses_display.cpp.o.d -o CMakeFiles/monitor.dir/src/ncurses_display.cpp.o -c /data/robin/dev/htopplus/src/ncurses_display.cpp
 
 CMakeFiles/monitor.dir/src/ncurses_display.cpp.i: cmake_force
@@ -142,7 +142,7 @@ CMakeFiles/monitor.dir/src/ncurses_display.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/process.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/process.cpp.o: /data/robin/dev/htopplus/src/process.cpp
 CMakeFiles/monitor.dir/src/process.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/monitor.dir/src/process.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/monitor.dir/src/process.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/process.cpp.o -MF CMakeFiles/monitor.dir/src/process.cpp.o.d -o CMakeFiles/monitor.dir/src/process.cpp.o -c /data/robin/dev/htopplus/src/process.cpp
 
 CMakeFiles/monitor.dir/src/process.cpp.i: cmake_force
@@ -156,7 +156,7 @@ CMakeFiles/monitor.dir/src/process.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/processor.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/processor.cpp.o: /data/robin/dev/htopplus/src/processor.cpp
 CMakeFiles/monitor.dir/src/processor.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/monitor.dir/src/processor.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/monitor.dir/src/processor.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/processor.cpp.o -MF CMakeFiles/monitor.dir/src/processor.cpp.o.d -o CMakeFiles/monitor.dir/src/processor.cpp.o -c /data/robin/dev/htopplus/src/processor.cpp
 
 CMakeFiles/monitor.dir/src/processor.cpp.i: cmake_force
@@ -170,7 +170,7 @@ CMakeFiles/monitor.dir/src/processor.cpp.s: cmake_force
 CMakeFiles/monitor.dir/src/system.cpp.o: CMakeFiles/monitor.dir/flags.make
 CMakeFiles/monitor.dir/src/system.cpp.o: /data/robin/dev/htopplus/src/system.cpp
 CMakeFiles/monitor.dir/src/system.cpp.o: CMakeFiles/monitor.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/monitor.dir/src/system.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/data/robin/dev/htopplus/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/monitor.dir/src/system.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/monitor.dir/src/system.cpp.o -MF CMakeFiles/monitor.dir/src/system.cpp.o.d -o CMakeFiles/monitor.dir/src/system.cpp.o -c /data/robin/dev/htopplus/src/system.cpp
 
 CMakeFiles/monitor.dir/src/system.cpp.i: cmake_force
@@ -207,7 +207,7 @@ monitor: CMakeFiles/monitor.dir/build.make
 monitor: /usr/lib64/libcurses.so
 monitor: /usr/lib64/libform.so
 monitor: CMakeFiles/monitor.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/data/robin/dev/htopplus/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable monitor"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/data/robin/dev/htopplus/cmake-build-release/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable monitor"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/monitor.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -219,6 +219,6 @@ CMakeFiles/monitor.dir/clean:
 .PHONY : CMakeFiles/monitor.dir/clean
 
 CMakeFiles/monitor.dir/depend:
-	cd /data/robin/dev/htopplus/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /data/robin/dev/htopplus /data/robin/dev/htopplus /data/robin/dev/htopplus/cmake-build-debug /data/robin/dev/htopplus/cmake-build-debug /data/robin/dev/htopplus/cmake-build-debug/CMakeFiles/monitor.dir/DependInfo.cmake --color=$(COLOR)
+	cd /data/robin/dev/htopplus/cmake-build-release && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /data/robin/dev/htopplus /data/robin/dev/htopplus /data/robin/dev/htopplus/cmake-build-release /data/robin/dev/htopplus/cmake-build-release /data/robin/dev/htopplus/cmake-build-release/CMakeFiles/monitor.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/monitor.dir/depend
 

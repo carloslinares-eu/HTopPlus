@@ -1,0 +1,25 @@
+/home/carloslinares/.local/share/JetBrains/Toolbox/apps/CLion/ch-0/232.8660.186/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Release -G "CodeBlocks - Unix Makefiles" -S /data/robin/dev/htopplus -B /data/robin/dev/htopplus/cmake-build-release
+CMake Deprecation Warning at CMakeLists.txt:1 (cmake_minimum_required):
+  Compatibility with CMake < 2.8.12 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value or use a ...<max> suffix to tell
+  CMake that the project does not need compatibility with older versions.
+
+
+-- The C compiler identification is GNU 13.2.1
+-- The CXX compiler identification is GNU 13.2.1
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Curses: /usr/lib64/libcurses.so  
+-- Configuring done (0.6s)
+-- Generating done (0.0s)
+-- Build files have been written to: /data/robin/dev/htopplus/cmake-build-release
