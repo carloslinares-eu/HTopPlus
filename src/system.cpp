@@ -23,6 +23,7 @@ System::System()  {
 void System::Running() {
     ReadSystemFiles();
     UpdateTiming();
+    Cpu().Running();
 }
 
 void System::ReadSystemFiles(){

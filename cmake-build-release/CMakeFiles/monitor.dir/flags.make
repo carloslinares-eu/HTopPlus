@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/data/robin/dev/htopplus/include
 
-CXX_FLAGS = -g -std=gnu++17 -fdiagnostics-color=always -Wall -Wextra
+CXX_FLAGS = -O3 -DNDEBUG -std=gnu++17 -fdiagnostics-color=always -Wall -Wextra
 

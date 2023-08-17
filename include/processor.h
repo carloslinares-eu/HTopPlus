@@ -3,21 +3,29 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
+#include <ctime>
 
 using std::string;
 using std::vector;
 
 class Processor {
  public:
-   float Utilization();
+    Processor();
 
-  // TODO: Declare any necessary private members
+    void Running();
+    float Utilization();
+
+
+
  private:
 
-    void GetSystemJiffies(const vector<vector<string>>& kStatFile);
-    long int system_jiffies;
-    long int previous_cycle_utilization;
-    long int current_cycle_utilization;
+    void getAggregatedCPUInfo();
+    void ReadSystemFiles();
+
+    vector<vector<string>> kCpuStatFile;
+    std::vector<long int> current_cpus_jiffies;
+
 };
 
 #endif

@@ -1,0 +1,3 @@
+/data/robin/dev/htopplus/cmake-build-release/CMakeFiles/monitor.dir
+/data/robin/dev/htopplus/cmake-build-release/CMakeFiles/edit_cache.dir
+/data/robin/dev/htopplus/cmake-build-release/CMakeFiles/rebuild_cache.dir
