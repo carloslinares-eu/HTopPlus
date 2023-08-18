@@ -43,10 +43,10 @@ void NCursesDisplay::DisplaySystem(System& system, WINDOW* window) {
   wprintw(window, "%s", ProgressBar(system.MemoryUtilization()).c_str());
   wattroff(window, COLOR_PAIR(1));
   mvwprintw(window, ++row, 2,
-            "%s", ("Total getSystemProcesses: " + to_string(system.TotalProcesses())).c_str());
+            "%s", ("Total Processes: " + to_string(system.TotalProcesses())).c_str());
   mvwprintw(
       window, ++row, 2,
-      "%s", ("Running getSystemProcesses: " + to_string(system.RunningProcesses())).c_str());
+      "%s", ("Running Processes: " + to_string(system.RunningProcesses())).c_str());
   mvwprintw(window, ++row, 2,
             "%s", ("Up Time: " + Format::ElapsedTime(system.UpTime())).c_str());
   wrefresh(window);
