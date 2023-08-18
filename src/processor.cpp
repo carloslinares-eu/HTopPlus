@@ -1,14 +1,11 @@
 #include "processor.h"
-#include "linux_parser.h"
 
-
-void Processor::Running() {
-    ReadSystemFiles();
-
+Processor::Processor(OSFiles &FilesRef) : files_ref(FilesRef) {
+    getAggregatedCPUInfo();
 }
 
-void Processor::ReadSystemFiles(){
-    kCpuStatFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kStatFilename);
+void Processor::getAggregatedCPUInfo() {
+    current_cpus_jiffies = LinuxParser::getAggregatedCPUInfo(files_ref.getCpuStatFile());
 }
 
 float Processor::Utilization() {
@@ -63,12 +60,3 @@ float Processor::Utilization() {
     return cpu_utilization;
 }
 
-
-void Processor::getAggregatedCPUInfo() {
-    current_cpus_jiffies = LinuxParser::getAggregatedCPUInfo(kCpuStatFile);
-}
-
-Processor::Processor() {
-    ReadSystemFiles();
-    getAggregatedCPUInfo();
-}

@@ -13,55 +13,26 @@ using std::string;
 using std::vector;
 
 
-System::System()  {
-    ReadSystemFiles(); Files.ReadSystemFiles();
-    previous_to_update_system_uptime = this->UpTime();
-    current_system_uptime = previous_to_update_system_uptime;
-    time_elapsed_since_update = 0;
+System::System() : CPU(Files) {
+    Files.ReadSystemFiles();
 }
 
-OSFiles& System::getOSFiles() {return Files;}
 Processor& System::getSystemCPU() { return CPU; }
 vector<Process>& System::getSystemProcesses() { return Processes; }
 
 void System::Running() {
-    ReadSystemFiles(); Files.ReadSystemFiles();
-    UpdateTiming();
-    getSystemCPU().Running();
-}
-
-void System::ReadSystemFiles(){
-    kCmdlineFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kCmdlineFilename);
-    kCpuInfoFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kCpuInfoFilename);
-    kStatusFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kStatusFilename);
-    kCpuStatFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kStatFilename);
-    kUptimeFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kUptimeFilename);
-    kMemInfoFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kMemInfoFilename);
-    kVersionFile = LinuxParser::ReadTextFile(LinuxParser::kProcDirectory + LinuxParser::kVersionFilename);
-    kPasswordFile = LinuxParser::ReadTextFile(LinuxParser::kPasswordPath);
-    kOSFileRaw = LinuxParser::ReadTextFile(LinuxParser::kOSPath);
-
-    kOSFileParsed = LinuxParser::ParseOSFile(kOSFileRaw);
+    Files.ReadSystemFiles();
 }
 
 
+string System::Kernel() { return LinuxParser::Kernel(Files.getVersionFile()); }
 
-string System::Kernel() { return LinuxParser::Kernel(kVersionFile); }
+float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(Files.getMemInfoFile());}
 
-float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(kMemInfoFile);}
+std::string System::OperatingSystem() { return LinuxParser::OperatingSystem(Files.getOSFileParsed()); }
 
-std::string System::OperatingSystem() { return LinuxParser::OperatingSystem(kOSFileParsed); }
+int System::RunningProcesses() { return LinuxParser::RunningProcesses(Files.getCpuStatFile()); }
 
-int System::RunningProcesses() { return LinuxParser::RunningProcesses(kCpuStatFile); }
+int System::TotalProcesses() { return LinuxParser::TotalProcesses(Files.getCpuStatFile()); }
 
-int System::TotalProcesses() { return LinuxParser::TotalProcesses(kCpuStatFile); }
-
-long int System::UpTime() { return LinuxParser::UpTimeTotal(kUptimeFile); }
-
-void System::UpdateTiming(){
-    current_system_uptime = this->UpTime();
-    time_elapsed_since_update = static_cast<int>(current_system_uptime - previous_to_update_system_uptime);
-    if (time_elapsed_since_update >= update_time_seconds) {
-        previous_to_update_system_uptime = current_system_uptime;
-    }
-}
+long int System::UpTime() { return LinuxParser::UpTimeTotal(Files.getUptimeFile()); }
