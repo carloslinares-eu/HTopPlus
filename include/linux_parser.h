@@ -15,7 +15,6 @@
 #include <algorithm>
 #include <map>
 #include <array>
-#include "system.h"
 
 using std::vector;
 using std::string;
@@ -83,7 +82,7 @@ vector<vector<string>> ReplaceAllInstancesInFile (const vector<vector<string>>& 
                                                   const string& to_replace_with);
 
 
-// Processes
+// getSystemProcesses
 string Command(int pid);
 string Ram(int pid);
 string Uid(int pid);

@@ -14,16 +14,20 @@ using std::vector;
 
 
 System::System()  {
-    ReadSystemFiles();
+    ReadSystemFiles(); Files.ReadSystemFiles();
     previous_to_update_system_uptime = this->UpTime();
     current_system_uptime = previous_to_update_system_uptime;
     time_elapsed_since_update = 0;
 }
 
+OSFiles& System::getOSFiles() {return Files;}
+Processor& System::getSystemCPU() { return CPU; }
+vector<Process>& System::getSystemProcesses() { return Processes; }
+
 void System::Running() {
-    ReadSystemFiles();
+    ReadSystemFiles(); Files.ReadSystemFiles();
     UpdateTiming();
-    Cpu().Running();
+    getSystemCPU().Running();
 }
 
 void System::ReadSystemFiles(){
@@ -40,9 +44,7 @@ void System::ReadSystemFiles(){
     kOSFileParsed = LinuxParser::ParseOSFile(kOSFileRaw);
 }
 
-Processor& System::Cpu() { return cpu_; }
 
-vector<Process>& System::Processes() { return processes_; }
 
 string System::Kernel() { return LinuxParser::Kernel(kVersionFile); }
 

@@ -35,7 +35,7 @@ void NCursesDisplay::DisplaySystem(System& system, WINDOW* window) {
   mvwprintw(window, ++row, 2, "CPU: ");
   wattron(window, COLOR_PAIR(1));
   mvwprintw(window, row, 10, "");
-  wprintw(window, "%s", ProgressBar(system.Cpu().Utilization()).c_str());
+  wprintw(window, "%s", ProgressBar(system.getSystemCPU().Utilization()).c_str());
   wattroff(window, COLOR_PAIR(1));
   mvwprintw(window, ++row, 2, "Memory: ");
   wattron(window, COLOR_PAIR(1));
@@ -43,10 +43,10 @@ void NCursesDisplay::DisplaySystem(System& system, WINDOW* window) {
   wprintw(window, "%s", ProgressBar(system.MemoryUtilization()).c_str());
   wattroff(window, COLOR_PAIR(1));
   mvwprintw(window, ++row, 2,
-            "%s", ("Total Processes: " + to_string(system.TotalProcesses())).c_str());
+            "%s", ("Total getSystemProcesses: " + to_string(system.TotalProcesses())).c_str());
   mvwprintw(
       window, ++row, 2,
-      "%s", ("Running Processes: " + to_string(system.RunningProcesses())).c_str());
+      "%s", ("Running getSystemProcesses: " + to_string(system.RunningProcesses())).c_str());
   mvwprintw(window, ++row, 2,
             "%s", ("Up Time: " + Format::ElapsedTime(system.UpTime())).c_str());
   wrefresh(window);
@@ -104,7 +104,7 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process>& processes,
     box(process_window, 0, 0);
     system.Running();
     DisplaySystem(system, system_window);
-    DisplayProcesses(system.Processes(), process_window, n);
+    DisplayProcesses(system.getSystemProcesses(), process_window, n);
     wrefresh(system_window);
     wrefresh(process_window);
     refresh();
