@@ -15,16 +15,11 @@ using std::vector;
 class Processor {
  public:
     explicit Processor(OSFiles& FilesRef);
-
-    void Running();
     float Utilization();
 
  private:
-
     void getAggregatedCPUInfo();
-
     OSFiles& files_ref;
-
     std::vector<long int> current_cpus_jiffies;
 
 };
