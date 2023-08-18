@@ -15,6 +15,7 @@
 #include <algorithm>
 #include <map>
 #include <array>
+#include <filesystem>
 
 using std::vector;
 using std::string;
@@ -22,6 +23,8 @@ using std::ifstream;
 using std::istringstream;
 using std::stof;
 using std::to_string;
+
+namespace fs = std::filesystem;
 
 
 namespace LinuxParser {
@@ -42,6 +45,7 @@ int TotalMemory(const vector<vector<string>>& kMemInfoFile);
 int AvailableMemory(const vector<vector<string>>& kMemInfoFile);
 float MemoryUtilization(const vector<vector<string>>& kMemInfoFile);
 long UpTimeTotal(const vector<vector<string>>& kUptimeFile);
+std::vector<long int> getAggregatedCPUInfo(const vector<vector<string>>& kStatFile);
 
     [[maybe_unused]] long UpTimeEffective(const vector<vector<string>>& kUptimeFile);
 std::vector<int> Pids();
@@ -65,13 +69,13 @@ enum CPUStates {
   kGuestNice_ = 9
 };
 
+// Processes
 std::vector<string> CpuUtilization();
 long Jiffies(const vector<vector<string>>& kStatFile);
 long ActiveJiffies(int pid[[maybe_unused]]);
 long ActiveJiffies(const vector<vector<string>>& kStatFile);
 long IdleJiffies(const vector<vector<string>>& kStatFile);
 
-std::vector<long int> getAggregatedCPUInfo(const vector<vector<string>>& kStatFile);
 
 
 // General functions
@@ -80,7 +84,7 @@ vector<string> ReadLine(const string& line);
 vector<vector<string>> ReplaceAllInstancesInFile (const vector<vector<string>>& input_file,
                                                   const string& to_find,
                                                   const string& to_replace_with);
-
+bool isInteger(const string& input_string);
 
 // getSystemProcesses
 string Command(int pid);

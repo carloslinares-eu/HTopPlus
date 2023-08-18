@@ -6,7 +6,7 @@
 #include <iostream>
 #include <ctime>
 
-#include "osfiles.h"
+#include "os_files.h"
 #include "linux_parser.h"
 
 using std::string;

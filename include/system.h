@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-#include "osfiles.h"
+#include "os_files.h"
 #include "processor.h"
 #include "process.h"
 
@@ -32,6 +32,8 @@ private:
     OSFiles Files = {};
     Processor CPU;
     vector<Process> Processes = {};
+
+    void UpdateListOfProcesses();
 };
 
 #endif

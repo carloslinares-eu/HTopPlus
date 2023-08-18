@@ -17,8 +17,9 @@ System::System() : CPU(Files) {
     Files.ReadSystemFiles();
 }
 
-Processor& System::getSystemCPU() { return CPU; }
-vector<Process>& System::getSystemProcesses() { return Processes; }
+Processor &System::getSystemCPU() { return CPU; }
+
+vector<Process> &System::getSystemProcesses() { return Processes; }
 
 void System::Running() {
     Files.ReadSystemFiles();
@@ -27,7 +28,7 @@ void System::Running() {
 
 string System::Kernel() { return LinuxParser::Kernel(Files.getVersionFile()); }
 
-float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(Files.getMemInfoFile());}
+float System::MemoryUtilization() { return LinuxParser::MemoryUtilization(Files.getMemInfoFile()); }
 
 std::string System::OperatingSystem() { return LinuxParser::OperatingSystem(Files.getOSFileParsed()); }
 
@@ -36,3 +37,7 @@ int System::RunningProcesses() { return LinuxParser::RunningProcesses(Files.getC
 int System::TotalProcesses() { return LinuxParser::TotalProcesses(Files.getCpuStatFile()); }
 
 long int System::UpTime() { return LinuxParser::UpTimeTotal(Files.getUptimeFile()); }
+
+void System::UpdateListOfProcesses() {
+
+}

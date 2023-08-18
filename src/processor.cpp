@@ -27,7 +27,7 @@ float Processor::Utilization() {
     previous_idle = previous_cpus_jiffies[LinuxParser::CPUStates::kIdle_] +
                     previous_cpus_jiffies[LinuxParser::CPUStates::kIOwait_];
     current_idle = current_cpus_jiffies[LinuxParser::CPUStates::kIdle_] +
-            current_cpus_jiffies[LinuxParser::CPUStates::kIOwait_];
+                   current_cpus_jiffies[LinuxParser::CPUStates::kIOwait_];
 
     previous_non_idle = previous_cpus_jiffies[LinuxParser::CPUStates::kUser_] +
                         previous_cpus_jiffies[LinuxParser::CPUStates::kNice_] +
@@ -36,11 +36,11 @@ float Processor::Utilization() {
                         previous_cpus_jiffies[LinuxParser::CPUStates::kSoftIRQ_] +
                         previous_cpus_jiffies[LinuxParser::CPUStates::kSteal_];
     current_non_idle = current_cpus_jiffies[LinuxParser::CPUStates::kUser_] +
-                        current_cpus_jiffies[LinuxParser::CPUStates::kNice_] +
-                        current_cpus_jiffies[LinuxParser::CPUStates::kSystem_] +
-                        current_cpus_jiffies[LinuxParser::CPUStates::kIRQ_] +
-                        current_cpus_jiffies[LinuxParser::CPUStates::kSoftIRQ_] +
-                        current_cpus_jiffies[LinuxParser::CPUStates::kSteal_];
+                       current_cpus_jiffies[LinuxParser::CPUStates::kNice_] +
+                       current_cpus_jiffies[LinuxParser::CPUStates::kSystem_] +
+                       current_cpus_jiffies[LinuxParser::CPUStates::kIRQ_] +
+                       current_cpus_jiffies[LinuxParser::CPUStates::kSoftIRQ_] +
+                       current_cpus_jiffies[LinuxParser::CPUStates::kSteal_];
 
     previous_total = previous_idle + previous_non_idle;
     current_total = current_idle + current_non_idle;
