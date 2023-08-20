@@ -14,12 +14,12 @@ public:
     explicit Process(OSFiles &input_files_ref, int input_pid, string input_user, string input_command);
     // Process needs a reference to OSFiles for accessing psw file.
 
-    int getPid();                               // TODO: See src/process.cpp
-    std::string getUser();                      // TODO: See src/process.cpp
-    std::string getCommand();                   // TODO: See src/process.cpp
+    int getPid();
+    std::string getUser();
+    std::string getCommand();
     float getCpuUtilization();                  // TODO: See src/process.cpp
-    std::string getRamUtilization();                       // TODO: See src/process.cpp
-    long int getUpTime();                       // TODO: See src/process.cpp
+    std::string getRamUtilization();            // TODO: See src/process.cpp
+    long int getUpTime() const;
 
     bool operator<(Process const &a) const;  // TODO: See src/process.cpp
 

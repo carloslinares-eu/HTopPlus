@@ -33,8 +33,8 @@ float Process::getCpuUtilization() { return cpu_utilization; }
 // TODO: Return this process's memory utilization
 string Process::getRamUtilization() { return ram_utilization; }
 
-long int Process::getUpTime() {
-    return LP::UpTime(files.getkStatFile());
+long int Process::getUpTime() const {
+    return uptime;
 }
 
 // TODO: Overload the "less than" comparison operator for Process objects
@@ -58,7 +58,7 @@ void Process::updateRamUtilization() {
 }
 
 void Process::updateUptime() {
-
+    uptime = LP::UpTime(files.getkStatFile());
 }
 
 
