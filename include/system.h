@@ -35,6 +35,7 @@ private:
     vector<int> pids;
 
     void UpdateListOfPIDs();
+    void GenerateProcesses();
 };
 
 #endif

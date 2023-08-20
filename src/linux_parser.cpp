@@ -128,23 +128,23 @@ int LinuxParser::RunningProcesses(const vector<vector<string>> &kStatFile) {
 
 // TODO: Read and return the command associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Command(int pid[[maybe_unused]]) { return {}; }
+string LinuxParser::Command(int pid[[maybe_unused]]) { return "command"; }
 
 // TODO: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Ram(int pid[[maybe_unused]]) { return {}; }
+string LinuxParser::Ram(int pid[[maybe_unused]]) { return "mem"; }
 
 // TODO: Read and return the user ID associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Uid(int pid[[maybe_unused]]) { return {}; }
+string LinuxParser::Uid(int pid[[maybe_unused]]) { return "user_id"; }
 
 // TODO: Read and return the user associated with a process
 // REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::User(int pid[[maybe_unused]]) { return {}; }
+string LinuxParser::User(int pid[[maybe_unused]]) { return "user"; }
 
 // TODO: Read and return the uptime of a process
 // REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::UpTime(int pid[[maybe_unused]]) { return 0; }
+long LinuxParser::UpTime(int pid[[maybe_unused]]) { return 123456789; }
 
 
 // Generic functions to follow the DRY principle

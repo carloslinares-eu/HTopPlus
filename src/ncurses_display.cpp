@@ -74,15 +74,15 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process> &processes,
         // Clear the line
         mvwprintw(window, ++row, pid_column, "%s", (string(window->_maxx - 2, ' ').c_str()));
 
-        mvwprintw(window, row, pid_column, "%s", to_string(processes[i].Pid()).c_str());
-        mvwprintw(window, row, user_column, "%s", processes[i].User().c_str());
-        float cpu = processes[i].CpuUtilization() * 100;
+        mvwprintw(window, row, pid_column, "%s", to_string(processes[i].getPid()).c_str());
+        mvwprintw(window, row, user_column, "%s", processes[i].getUser().c_str());
+        float cpu = processes[i].getCpuUtilization() * 100;
         mvwprintw(window, row, cpu_column, "%s", to_string(cpu).substr(0, 4).c_str());
-        mvwprintw(window, row, ram_column, "%s", processes[i].Ram().c_str());
+        mvwprintw(window, row, ram_column, "%s", processes[i].getRamUtilization().c_str());
         mvwprintw(window, row, time_column,
-                  "%s", Format::ElapsedTime(processes[i].UpTime()).c_str());
+                  "%s", Format::ElapsedTime(processes[i].getUpTime()).c_str());
         mvwprintw(window, row, command_column,
-                  "%s", processes[i].Command().substr(0, window->_maxx - 46).c_str());
+                  "%s", processes[i].getCommand().substr(0, window->_maxx - 46).c_str());
     }
 }
 

@@ -25,6 +25,7 @@ vector<Process> &System::getSystemProcesses() { return processes; }
 void System::Running() {
     files.ReadSystemFiles();
     UpdateListOfPIDs();
+    GenerateProcesses();
 }
 
 
@@ -42,4 +43,14 @@ long int System::getUpTime() { return LinuxParser::UpTimeTotal(files.getUptimeFi
 
 void System::UpdateListOfPIDs() {
     pids = LinuxParser::Pids();
+}
+
+void System::GenerateProcesses() {
+    processes.clear();
+    for (int pid : pids) {
+        string user = LinuxParser::User(pid);
+        string command = LinuxParser::Command(pid);
+        Process new_process(files, pid, user, command);
+        processes.push_back(new_process);
+    }
 }
