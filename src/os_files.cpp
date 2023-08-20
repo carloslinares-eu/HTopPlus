@@ -16,5 +16,5 @@ void OSFiles::ReadSystemFiles() {
 
 void OSFiles::ParseSystemFiles() {
     kOSFileParsed = LinuxParser::ParseOSFile(kOSFileRaw);
-    kPasswordFileParsed = LinuxParser::ParsePassFile(kPasswordFileRaw);
+    kPasswordFileParsed = LinuxParser::ParsePasswordFile(kPasswordFileRaw);
 }

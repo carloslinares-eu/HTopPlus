@@ -53,7 +53,7 @@ int TotalProcesses(const vector<vector<string>>& kStatFile);
 int RunningProcesses(const vector<vector<string>>& kStatFile);
 string Kernel(const vector<vector<string>>& kVersionFileRef);
 vector<vector<string>> ParseOSFile(const vector<vector<string>>& kOSFileRef);
-vector<vector<string>> ParsePassFile(const vector<vector<string>>& kPassFileRefRaw);
+vector<vector<string>> ParsePasswordFile(const vector<vector<string>>& kPasswordFileRefRaw);
 string OperatingSystem(const vector<vector<string>>& kOSFileRef);
 
 // cpu. To be used as index of vector current_cpus_jiffies

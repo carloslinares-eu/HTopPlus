@@ -126,9 +126,16 @@ int LinuxParser::RunningProcesses(const vector<vector<string>>& kStatFile) {
     }
 }
 
-// TODO: Read and return the command associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Command(int pid[[maybe_unused]]) { return "command"; }
+string LinuxParser::Command(int pid) {
+    string cmd_line_file_path = kProcDirectory + "/" + std::to_string(pid) + kCmdlineFilename;
+    vector<vector<string>> cmd_line_file = ReadTextFile(cmd_line_file_path);
+    if (cmd_line_file.empty()) {
+        return "Unknown";
+    }
+    else {
+        return cmd_line_file[0][0];
+    }
+}
 
 // TODO: Read and return the memory used by a process
 // REMOVE: [[maybe_unused]] once you define the function
@@ -212,10 +219,10 @@ vector<vector<string>> LinuxParser::ParseOSFile(const vector<vector<string>> &kO
     return parsed_os_file;
 }
 
-vector<vector<string>> LinuxParser::ParsePassFile(const vector<vector<string>> &kPassFileRefRaw) {
+vector<vector<string>> LinuxParser::ParsePasswordFile(const vector<vector<string>> &kPasswordFileRefRaw) {
     vector<vector<string>> parsed_pass_file;
 
-    for (const vector<string> &line: kPassFileRefRaw) {
+    for (const vector<string> &line: kPasswordFileRefRaw) {
         // kPassFile is expected to have only one element in the vector representing the line.
         // Thus taking only the first element.
         vector<string> parsed_os_line;

@@ -20,10 +20,8 @@ files(input_pid) {
     uptime = 0;
 }
 
-// TODO: Return this process's ID
 int Process::getPid() { return pid; }
 
-// TODO: Return the user (name) that generated this process
 string Process::getUser() { return user; }
 
 // TODO: Return the command that generated this process
