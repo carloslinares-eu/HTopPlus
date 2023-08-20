@@ -18,7 +18,7 @@ Process::Process(OSFiles &FilesRef) : files_ref(FilesRef) {
 // TODO: Return this process's ID
 int Process::Pid() { return 0; }
 
-// TODO: Return this process's CPU utilization
+// TODO: Return this process's cpu utilization
 float Process::CpuUtilization() { return 0; }
 
 // TODO: Return the command that generated this process

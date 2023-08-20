@@ -30,9 +30,9 @@ std::string NCursesDisplay::ProgressBar(float percent) {
 
 void NCursesDisplay::DisplaySystem(System &system, WINDOW *window) {
     int row{0};
-    mvwprintw(window, ++row, 2, "%s", ("OS: " + system.OperatingSystem()).c_str());
-    mvwprintw(window, ++row, 2, "%s", ("Kernel: " + system.Kernel()).c_str());
-    mvwprintw(window, ++row, 2, "CPU: ");
+    mvwprintw(window, ++row, 2, "%s", ("OS: " + system.getOperatingSystem()).c_str());
+    mvwprintw(window, ++row, 2, "%s", ("getKernel: " + system.getKernel()).c_str());
+    mvwprintw(window, ++row, 2, "cpu: ");
     wattron(window, COLOR_PAIR(1));
     mvwprintw(window, row, 10, "");
     wprintw(window, "%s", ProgressBar(system.getSystemCPU().Utilization()).c_str());
@@ -40,15 +40,15 @@ void NCursesDisplay::DisplaySystem(System &system, WINDOW *window) {
     mvwprintw(window, ++row, 2, "Memory: ");
     wattron(window, COLOR_PAIR(1));
     mvwprintw(window, row, 10, "");
-    wprintw(window, "%s", ProgressBar(system.MemoryUtilization()).c_str());
+    wprintw(window, "%s", ProgressBar(system.getMemoryUtilization()).c_str());
     wattroff(window, COLOR_PAIR(1));
     mvwprintw(window, ++row, 2,
-              "%s", ("Total Processes: " + to_string(system.TotalProcesses())).c_str());
+              "%s", ("Total processes: " + to_string(system.getTotalProcesses())).c_str());
     mvwprintw(
             window, ++row, 2,
-            "%s", ("Running Processes: " + to_string(system.RunningProcesses())).c_str());
+            "%s", ("Running processes: " + to_string(system.getRunningProcesses())).c_str());
     mvwprintw(window, ++row, 2,
-              "%s", ("Up Time: " + Format::ElapsedTime(system.UpTime())).c_str());
+              "%s", ("Up Time: " + Format::ElapsedTime(system.getUpTime())).c_str());
     wrefresh(window);
 }
 
@@ -64,7 +64,7 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process> &processes,
     wattron(window, COLOR_PAIR(2));
     mvwprintw(window, ++row, pid_column, "PID");
     mvwprintw(window, row, user_column, "USER");
-    mvwprintw(window, row, cpu_column, "CPU[%%]");
+    mvwprintw(window, row, cpu_column, "cpu[%%]");
     mvwprintw(window, row, ram_column, "RAM[MB]");
     mvwprintw(window, row, time_column, "TIME+");
     mvwprintw(window, row, command_column, "COMMAND");

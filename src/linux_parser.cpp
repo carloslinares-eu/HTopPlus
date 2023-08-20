@@ -20,14 +20,9 @@ vector<int> LinuxParser::Pids() {
     vector<int> pids;
     vector<string> folderNames;
 
-    if (!fs::is_directory(kProcDirectory)) {
-        std::cerr << "Error: '" << kProcDirectory << "' is not a valid directory." << std::endl;
-        return pids;
-    }
-
     for (const auto& entry : fs::directory_iterator(kProcDirectory)) {
-        if (fs::is_directory(entry)) {
-            folderNames.push_back(entry.path().filename());
+        if (fs::is_directory(entry) && isInteger(entry.path().filename())) {
+            pids.push_back(std::stoi(entry.path().filename()));
         }
     }
 
@@ -106,7 +101,7 @@ long LinuxParser::ActiveJiffies(const vector<vector<string>> &kStatFile) { retur
 // TODO: Read and return the number of idle jiffies for the system
 long LinuxParser::IdleJiffies(const vector<vector<string>> &kStatFile) { return 0; }
 
-// TODO: Read and return CPU utilization
+// TODO: Read and return cpu utilization
 vector<string> LinuxParser::CpuUtilization() { return {}; }
 
 int LinuxParser::TotalProcesses(const vector<vector<string>> &kStatFile) {

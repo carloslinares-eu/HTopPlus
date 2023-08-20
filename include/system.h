@@ -19,21 +19,22 @@ public:
     Processor &getSystemCPU();
     vector<Process> &getSystemProcesses();
 
-    float MemoryUtilization();
-    long UpTime();
-    int TotalProcesses();
-    int RunningProcesses();
-    string Kernel();
-    string OperatingSystem();
+    float getMemoryUtilization();
+    long getUpTime();
+    int getTotalProcesses();
+    int getRunningProcesses();
+    string getKernel();
+    string getOperatingSystem();
 
     void Running();
 
 private:
-    OSFiles Files = {};
-    Processor CPU;
-    vector<Process> Processes = {};
+    OSFiles files = {};
+    Processor cpu;
+    vector<Process> processes = {};
+    vector<int> pids;
 
-    void UpdateListOfProcesses();
+    void UpdateListOfPIDs();
 };
 
 #endif

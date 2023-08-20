@@ -55,7 +55,7 @@ string Kernel(const vector<vector<string>>& kVersionFileRef);
 vector<vector<string>> ParseOSFile(const vector<vector<string>>& kOSFileRef);
 string OperatingSystem(const vector<vector<string>>& kOSFileRef);
 
-// CPU. To be used as index of vector current_cpus_jiffies
+// cpu. To be used as index of vector current_cpus_jiffies
 enum CPUStates {
   kUser_ = 0,
   kNice_ = 1,
@@ -69,7 +69,7 @@ enum CPUStates {
   kGuestNice_ = 9
 };
 
-// Processes
+// processes
 std::vector<string> CpuUtilization();
 long Jiffies(const vector<vector<string>>& kStatFile);
 long ActiveJiffies(int pid[[maybe_unused]]);
