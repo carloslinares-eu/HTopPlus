@@ -46,11 +46,12 @@ void System::UpdateListOfPIDs() {
 }
 
 void System::GenerateProcesses() {
-    processes.clear();
+    processes.clear();  // Wiping out all the information of processes before populating it again.
     for (int pid : pids) {
-        string user = LinuxParser::User(pid);
+        string user = LinuxParser::User(pid, files.getPasswordFileParsed());
         string command = LinuxParser::Command(pid);
         Process new_process(files, pid, user, command);
+        new_process.updateDynamicInformation();
         processes.push_back(new_process);
     }
 }

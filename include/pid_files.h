@@ -4,19 +4,23 @@
 #include <string>
 #include <vector>
 
-using std::string;
-using std::vector;
 
 #include "linux_parser.h"
 
+using std::string;
+using std::vector;
+
+namespace LP = LinuxParser;
 
 class PIDFiles {
 public:
-    PIDFiles();
+    explicit PIDFiles(int& pid);
 
     void ReadPIDFiles();
 
 private:
+    const string pid_folder_path_in_proc;
+
     vector<vector<string>> kCmdLineFile;
     vector<vector<string>> KStatFile;
     vector<vector<string>> kStatusFile;

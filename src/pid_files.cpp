@@ -1,13 +1,9 @@
-//
-// Created by carloslinares on 18.08.23.
-//
-
 #include "pid_files.h"
 
-PIDFiles::PIDFiles() {
-
-}
+PIDFiles::PIDFiles(int &pid) : pid_folder_path_in_proc(LP::kProcDirectory + "/" + std::to_string(pid)) {}
 
 void PIDFiles::ReadPIDFiles() {
-
+    kCmdLineFile = LinuxParser::ReadTextFile(pid_folder_path_in_proc + LP::kCmdlineFilename);
+    KStatFile = LinuxParser::ReadTextFile(pid_folder_path_in_proc + LP::kStatFilename);
+    kStatusFile = LinuxParser::ReadTextFile(pid_folder_path_in_proc + LP::kStatusFilename);
 }

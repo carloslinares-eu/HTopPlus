@@ -10,7 +10,11 @@ using std::to_string;
 using std::vector;
 
 Process::Process(OSFiles &input_files_ref, int input_pid, string input_user, string input_command) :
-files_ref(input_files_ref), pid(input_pid), user(std::move(input_user)), command(std::move(input_command)) {
+os_files_ref(input_files_ref),
+pid(input_pid),
+user(std::move(input_user)),
+command(std::move(input_command)),
+files(input_pid) {
     cpu_utilization = 0;
     ram_utilization = "0";
     uptime = 0;
@@ -37,4 +41,33 @@ long int Process::getUpTime() { return uptime; }
 // TODO: Overload the "less than" comparison operator for Process objects
 // REMOVE: [[maybe_unused]] once you define the function
 bool Process::operator<(Process const &a[[maybe_unused]]) const { return true; }
+
+
+void Process::updateDynamicInformation() {
+    files.ReadPIDFiles();
+    updateCpuUtilization();
+    updateRamUtilization();
+    updateUptime();
+}
+
+void Process::updateCpuUtilization() {
+
+}
+
+void Process::updateRamUtilization() {
+
+}
+
+void Process::updateUptime() {
+
+}
+
+
+
+
+
+
+
+
+
 

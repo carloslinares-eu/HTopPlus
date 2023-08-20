@@ -14,25 +14,26 @@ public:
     OSFiles();
 
     void ReadSystemFiles();
+    void ParseSystemFiles();
 
     vector<vector<string>> &getCpuStatFile() {return kCpuStatFile;}
     vector<vector<string>> &getUptimeFile() {return kUptimeFile;}
     vector<vector<string>> &getMemInfoFile() {return kMemInfoFile;}
     vector<vector<string>> &getVersionFile() {return kVersionFile;}
     vector<vector<string>> &getOSFileParsed() {return kOSFileParsed;}
-    vector<vector<string>> &getPasswordFile() {return kPasswordFile;}
+    vector<vector<string>> &getPasswordFileParsed() {return kPasswordFileParsed;}
 
 
 private:
-
     vector<vector<string>> kCpuStatFile;
     vector<vector<string>> kUptimeFile;
     vector<vector<string>> kMemInfoFile;
     vector<vector<string>> kVersionFile;
     vector<vector<string>> kOSFileRaw;
-    vector<vector<string>> kOSFileParsed;
-    vector<vector<string>> kPasswordFile;
+    vector<vector<string>> kPasswordFileRaw;
 
+    vector<vector<string>> kOSFileParsed;
+    vector<vector<string>> kPasswordFileParsed;
 };
 
 

@@ -115,7 +115,7 @@ int LinuxParser::TotalProcesses(const vector<vector<string>> &kStatFile) {
     }
 }
 
-int LinuxParser::RunningProcesses(const vector<vector<string>> &kStatFile) {
+int LinuxParser::RunningProcesses(const vector<vector<string>>& kStatFile) {
     for (vector<string> line: kStatFile) {
         string key = line[0];
         if (key == "procs_running") {
@@ -134,13 +134,27 @@ string LinuxParser::Command(int pid[[maybe_unused]]) { return "command"; }
 // REMOVE: [[maybe_unused]] once you define the function
 string LinuxParser::Ram(int pid[[maybe_unused]]) { return "mem"; }
 
-// TODO: Read and return the user ID associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Uid(int pid[[maybe_unused]]) { return "user_id"; }
 
-// TODO: Read and return the user associated with a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::User(int pid[[maybe_unused]]) { return "user"; }
+string LinuxParser::Uid(int pid) {
+    string status_file_path = kProcDirectory + "/" + std::to_string(pid) + kStatusFilename;
+    vector<vector<string>> pid_status_file = ReadTextFile (status_file_path);
+    return pid_status_file[8][1];
+}
+
+string LinuxParser::User(int pid, const vector<vector<string>>& kPasswordFileParsed) {
+    string user_id = Uid(pid);
+    for (vector<string> user_information : kPasswordFileParsed) {
+        string name = user_information[0];
+        string id = user_information[2];
+        if (id == user_id) {
+            return name;
+        }
+        else {
+            continue;
+        }
+    }
+    return "unknown";
+}
 
 // TODO: Read and return the uptime of a process
 // REMOVE: [[maybe_unused]] once you define the function
@@ -180,7 +194,7 @@ vector<vector<string>> LinuxParser::ParseOSFile(const vector<vector<string>> &kO
         // Thus taking only the first element.
         vector<string> parsed_os_line;
         string line_string;
-        for (const string &word: line) {
+        for (const string &word: line) { // This is done to merge all the words in a single
             line_string += word + " ";
         }
         std::replace(line_string.begin(), line_string.end(), ' ', '_');
@@ -196,6 +210,31 @@ vector<vector<string>> LinuxParser::ParseOSFile(const vector<vector<string>> &kO
         parsed_os_file.push_back(parsed_os_line);
     }
     return parsed_os_file;
+}
+
+vector<vector<string>> LinuxParser::ParsePassFile(const vector<vector<string>> &kPassFileRefRaw) {
+    vector<vector<string>> parsed_pass_file;
+
+    for (const vector<string> &line: kPassFileRefRaw) {
+        // kPassFile is expected to have only one element in the vector representing the line.
+        // Thus taking only the first element.
+        vector<string> parsed_os_line;
+        string line_string;
+        for (const string &word: line) { // This is done to merge all the words in a single
+            line_string += word + " ";
+        }
+        std::replace(line_string.begin(), line_string.end(), ' ', '_');
+        std::replace(line_string.begin(), line_string.end(), ':', ' ');
+
+        std::istringstream line_stream(line_string);
+        string word;
+
+        while (line_stream >> word) {
+            parsed_os_line.push_back(word);
+        }
+        parsed_pass_file.push_back(parsed_os_line);
+    }
+    return parsed_pass_file;
 }
 
 bool LinuxParser::isInteger(const std::string &input_string) {

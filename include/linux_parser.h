@@ -53,6 +53,7 @@ int TotalProcesses(const vector<vector<string>>& kStatFile);
 int RunningProcesses(const vector<vector<string>>& kStatFile);
 string Kernel(const vector<vector<string>>& kVersionFileRef);
 vector<vector<string>> ParseOSFile(const vector<vector<string>>& kOSFileRef);
+vector<vector<string>> ParsePassFile(const vector<vector<string>>& kPassFileRefRaw);
 string OperatingSystem(const vector<vector<string>>& kOSFileRef);
 
 // cpu. To be used as index of vector current_cpus_jiffies
@@ -90,7 +91,7 @@ bool isInteger(const string& input_string);
 string Command(int pid);
 string Ram(int pid);
 string Uid(int pid);
-string User(int pid);
+string User(int pid, const vector<vector<string>>& kPasswordFile);
 long int UpTime(int pid);
 };  // namespace LinuxParser
 
