@@ -21,7 +21,6 @@ class Processor {
     void getAggregatedCPUInfo();
     OSFiles& files_ref;
     std::vector<long int> current_cpus_jiffies;
-
 };
 
 #endif

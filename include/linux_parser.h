@@ -92,7 +92,7 @@ string Command(int pid);
 string Ram(int pid);
 string Uid(int pid);
 string User(int pid, const vector<vector<string>>& kPasswordFile);
-long int UpTime(int pid);
+long int UpTime(vector<vector<string>>& kPdiStatFile);
 };  // namespace LinuxParser
 
 #endif

@@ -163,9 +163,12 @@ string LinuxParser::User(int pid, const vector<vector<string>>& kPasswordFilePar
     return "unknown";
 }
 
-// TODO: Read and return the uptime of a process
-// REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::UpTime(int pid[[maybe_unused]]) { return 123456789; }
+
+long LinuxParser::UpTime(vector<vector<string>>& kPdiStatFile) {
+    long int active_jiffies = std::stoi(kPdiStatFile[0][21]);
+    long int active_time_seconds = active_jiffies / sysconf(_SC_CLK_TCK);
+    return active_time_seconds;
+}
 
 
 // Generic functions to follow the DRY principle
@@ -248,10 +251,10 @@ bool LinuxParser::isInteger(const std::string &input_string) {
     try {
         size_t pos;
         int result = std::stoi(input_string, &pos);
-        return pos == input_string.size(); // Check if entire string was converted
+        return pos == input_string.size();
     } catch (const std::invalid_argument&) {
-        return false; // Conversion failed
+        return false;
     } catch (const std::out_of_range&) {
-        return false; // Conversion out of range
+        return false;
     }
 }
