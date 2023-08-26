@@ -1,5 +1,3 @@
-#include <unistd.h>
-#include <cctype>
 #include <sstream>
 #include <utility>
 #include <vector>
@@ -18,7 +16,7 @@ files(input_pid) {
     cpu_utilization = 0;
     ram_utilization = "0";
     uptime = 0;
-    sum_current_process_jiffies = LinuxParser::ActiveJiffiesProcess(files.getkStatFile());
+    sum_current_process_jiffies = LinuxParser::ActiveJiffiesProcess(files.getStatFile());
     sum_previous_process_jiffies = sum_current_process_jiffies;
 }
 
@@ -58,11 +56,11 @@ void Process::updateRamUtilization() {
 }
 
 void Process::updateUptime() {
-    uptime = LP::UpTime(files.getkStatFile());
+    uptime = LP::UpTime(files.getStatFile());
 }
 
 void Process::updateJiffies() {
-    sum_current_process_jiffies = LinuxParser::ActiveJiffiesProcess(files.getkStatFile());
+    sum_current_process_jiffies = LinuxParser::ActiveJiffiesProcess(files.getStatFile());
 }
 
 
