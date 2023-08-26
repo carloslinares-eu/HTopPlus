@@ -24,6 +24,7 @@ vector<Process> &System::getSystemProcesses() { return processes; }
 
 void System::Running() {
     files.ReadSystemFiles();
+    cpu.Running();
     UpdateListOfPIDs();
     GenerateProcesses();
 }

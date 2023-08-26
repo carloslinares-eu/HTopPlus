@@ -18,19 +18,9 @@ files(input_pid) {
     cpu_utilization = 0;
     ram_utilization = "0";
     uptime = 0;
-    current_process_jiffies = 0;
-    previous_process_jiffies = 0;
+    sum_current_process_jiffies = LinuxParser::ActiveJiffiesProcess(files.getkStatFile());
+    sum_previous_process_jiffies = sum_current_process_jiffies;
 }
-
-int Process::getPid() { return pid; }
-
-string Process::getUser() { return user; }
-
-// TODO: Return the command that generated this process
-string Process::getCommand() { return command; }
-
-// TODO: Return this process's cpu utilization
-float Process::getCpuUtilization() const { return cpu_utilization; }
 
 // TODO: Return this process's memory utilization
 string Process::getRamUtilization() { return ram_utilization; }
@@ -46,23 +36,21 @@ bool Process::operator<(Process const &a[[maybe_unused]]) const { return true; }
 
 void Process::updateDynamicInformation() {
     files.ReadPIDFiles();
-    calculateCpuUtilization();
+    updateCpuUtilization();
     updateRamUtilization();
     updateUptime();
 }
 
-void Process::calculateCpuUtilization() {
-    bool is_first_cycle;
-    current_process_jiffies = LinuxParser::ActiveJiffiesProcess(files.getkStatFile());
+void Process::updateCpuUtilization() {
+    long int current_jiffies_increment;
     long int latest_cpu_increment = cpu.getUsageIncrement();
 
-    is_first_cycle = previous_process_jiffies == 0;
+    updateJiffies();
+    current_jiffies_increment = sum_current_process_jiffies - sum_previous_process_jiffies;
 
-    if (is_first_cycle) {
-        cpu_utilization = 0.0;
-    }
+    cpu_utilization = static_cast<float>(current_jiffies_increment)/static_cast<float>(latest_cpu_increment);
 
-
+    saveJiffiesForNextCycle();
 }
 
 void Process::updateRamUtilization() {
@@ -73,6 +61,14 @@ void Process::updateUptime() {
     uptime = LP::UpTime(files.getkStatFile());
 }
 
+void Process::updateJiffies() {
+    sum_current_process_jiffies = LinuxParser::ActiveJiffiesProcess(files.getkStatFile());
+}
+
+
+void Process::saveJiffiesForNextCycle() {
+    sum_previous_process_jiffies = sum_current_process_jiffies;
+}
 
 
 

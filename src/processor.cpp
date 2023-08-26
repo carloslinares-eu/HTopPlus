@@ -1,14 +1,18 @@
 #include "processor.h"
 
 Processor::Processor(OSFiles &FilesRef) : files_ref(FilesRef) {
-    updateAggregatedCPUInfo();
+    updateAggregatedCpuInfo();
 }
 
-void Processor::updateAggregatedCPUInfo() {
+void Processor::Running() {
+    calculateCpuUtilization();
+}
+
+void Processor::updateAggregatedCpuInfo() {
     current_cpus_jiffies = LinuxParser::getAggregatedCPUInfo(files_ref.getCpuStatFile());
 }
 
-float Processor::Utilization() {
+void Processor::calculateCpuUtilization() {
     bool is_first_cycle;
 
     long int previous_idle, current_idle;
@@ -16,13 +20,11 @@ float Processor::Utilization() {
     long int previous_total, current_total;
     long int idle_increment, total_increment;
 
-    float cpu_utilization;
-
     // Saves previous values before updating.
     previous_cycle_cpus_jiffies = current_cpus_jiffies;
 
     // Updates current cpus jiffies with latest information available.
-    updateAggregatedCPUInfo();
+    updateAggregatedCpuInfo();
 
     previous_idle = previous_cycle_cpus_jiffies[LinuxParser::CPUStates::kIdle_] +
                     previous_cycle_cpus_jiffies[LinuxParser::CPUStates::kIOwait_];
@@ -53,13 +55,8 @@ float Processor::Utilization() {
     current_usage_increment = total_increment-idle_increment;
 
     if (is_first_cycle) {
-        cpu_utilization = 0.0;
+        utilization = 0.0;
     } else {
-        cpu_utilization = static_cast<float>(total_increment - idle_increment) / static_cast<float>(total_increment);
+        utilization = static_cast<float>(total_increment - idle_increment) / static_cast<float>(total_increment);
     }
-    return cpu_utilization;
-}
-
-void Processor::saveUsageIncrement(long int input_usage_increment) {
-    current_usage_increment = input_usage_increment;
 }
