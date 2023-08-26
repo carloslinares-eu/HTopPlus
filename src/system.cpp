@@ -50,7 +50,7 @@ void System::GenerateProcesses() {
     for (int pid : pids) {
         string user = LinuxParser::User(pid, files.getPasswordFileParsed());
         string command = LinuxParser::Command(pid);
-        Process new_process(files, pid, user, command);
+        Process new_process(pid, user, command, getSystemCPU());
         new_process.updateDynamicInformation();
         processes.push_back(new_process);
     }

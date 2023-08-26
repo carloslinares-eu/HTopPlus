@@ -6,30 +6,33 @@
 #include "pid_files.h"
 #include "os_files.h"
 #include "linux_parser.h"
+#include "format.h"
+#include "processor.h"
 
 using std::string;
 
 class Process {
 public:
-    explicit Process(OSFiles &input_files_ref, int input_pid, string input_user, string input_command);
+    explicit Process(int input_pid, string input_user, string input_command, Processor &system_cpu);
     // Process needs a reference to OSFiles for accessing psw file.
 
     int getPid();
     std::string getUser();
     std::string getCommand();
-    float getCpuUtilization();                  // TODO: See src/process.cpp
-    std::string getRamUtilization();            // TODO: See src/process.cpp
-    long int getUpTime() const;
+    [[nodiscard]] float getCpuUtilization() const;
+    std::string getRamUtilization();
+    [[nodiscard]] long int getUpTime() const;
 
     bool operator<(Process const &a) const;  // TODO: See src/process.cpp
 
     void updateDynamicInformation();
 
 private:
-    const OSFiles& os_files_ref;
     const int pid;
     const std::string user;
     const std::string command;
+
+    Processor& cpu;
 
     PIDFiles files;
 
@@ -37,7 +40,10 @@ private:
     string ram_utilization;
     long int uptime;
 
-    void updateCpuUtilization();
+    long int current_process_jiffies;
+    long int previous_process_jiffies;
+
+    void calculateCpuUtilization();
     void updateRamUtilization();
     void updateUptime();
 

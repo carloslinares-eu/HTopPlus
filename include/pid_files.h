@@ -16,7 +16,7 @@ class PIDFiles {
 public:
     explicit PIDFiles(int& pid);
 
-    vector<vector<string>> &getkStatFile() {return KStatFile;}
+    vector<vector<string>>& getkStatFile() {return KStatFile;}
 
     void ReadPIDFiles();
 

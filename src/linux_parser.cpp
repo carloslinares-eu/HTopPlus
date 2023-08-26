@@ -90,10 +90,13 @@ std::vector<long int> LinuxParser::getAggregatedCPUInfo(const vector<vector<stri
     return all_cpus_jiffies;
 }
 
-
-// TODO: Read and return the number of active jiffies for a PID
-// REMOVE: [[maybe_unused]] once you define the function
-long LinuxParser::ActiveJiffies(int pid[[maybe_unused]]) { return 0; }
+long LinuxParser::ActiveJiffiesProcess(const vector<vector<string>> &kStatFile) {
+    long int user_time = std::stoi(kStatFile[0][13]);
+    long int kernel_time = std::stoi(kStatFile[0][14]);
+    long int user_children_time = std::stoi(kStatFile[0][15]);
+    long int kernel_children_time = std::stoi(kStatFile[0][16]);
+    return (user_time + kernel_time + user_children_time + kernel_children_time);
+}
 
 // TODO: Read and return the number of active jiffies for the system
 long LinuxParser::ActiveJiffies(const vector<vector<string>> &kStatFile) { return 0; }
