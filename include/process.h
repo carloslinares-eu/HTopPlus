@@ -2,6 +2,9 @@
 #define PROCESS_H
 
 #include <string>
+#include <utility>
+#include <sstream>
+
 
 #include "pid_files.h"
 #include "os_files.h"
@@ -10,6 +13,7 @@
 #include "processor.h"
 
 using std::string;
+using std::vector;
 
 class Process {
 public:
@@ -19,9 +23,9 @@ public:
     [[nodiscard]] int getPid() const {return pid;}
     string getUser() {return user;};
     string getCommand() {return command;}
-    [[nodiscard]] float getCpuUtilization() const {return cpu_utilization;};
-    std::string getRamUtilization();
-    [[nodiscard]] long int getUpTime() const;
+    [[nodiscard]] float getCpuUtilization() const {return cpu_utilization;}
+    std::string getRamUtilization() {return ram_utilization;}
+    [[nodiscard]] long int getUpTime() const {return uptime;}
 
     bool operator<(Process const &a) const;  // TODO: See src/process.cpp
 

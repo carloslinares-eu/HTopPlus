@@ -40,6 +40,9 @@ private:
     vector<int> previous_cycle_pids;
     vector<int> new_pids;
 
+    unsigned int number_of_updated_process = 0;
+    unsigned int number_of_added_process = 0;
+
     void UpdateListOfPIDs();
     void GenerateProcesses();
     void UpdateAliveProcesses();

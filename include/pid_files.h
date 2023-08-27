@@ -18,6 +18,8 @@ public:
 
     vector<vector<string>>& getStatFile() {return KStatFile;}
     vector<vector<string>>& getStatusFile() {return kStatusFile;}
+    vector<vector<string>>& getCmdLineFile() {return kCmdLineFile;}
+
 
     void ReadPIDFiles();
 

@@ -45,7 +45,7 @@ void System::GenerateProcesses() {
 }
 
 void System::UpdateAliveProcesses() {
-    unsigned int number_of_updated_process = 0;
+    number_of_updated_process = 0;
     vector<Process> tmp_cp_processes = processes;
     processes.clear();
 
@@ -60,29 +60,25 @@ void System::UpdateAliveProcesses() {
             continue;
         }
     }
-
-    std::cout << "Updated " << number_of_updated_process << " processes." << "/n";
-    std::cout << "Removed " << number_of_registered_processes - number_of_updated_process << " processes." << "/n";
 }
 
 
 void System::AddNewProcesses() {
-    unsigned int number_of_added_process = 0;
-
-    for (int pid : new_pids) {
-        string user = LinuxParser::User(pid, files.getPasswordFileParsed());
-        string command = LinuxParser::Command(pid);
-        Process new_process(pid, user, command, getSystemCPU());
-        processes.push_back(new_process);
-        number_of_added_process++;
+    number_of_added_process = 0;
+    if (!new_pids.empty()) {
+        for (int pid : new_pids) {
+            string user = LinuxParser::User(pid, files.getPasswordFileParsed());
+            string command = LinuxParser::Command(pid);
+            Process new_process(pid, user, command, getSystemCPU());
+            processes.push_back(new_process);
+            number_of_added_process++;
+        }
     }
-    std::cout << "Added  " << number_of_added_process << " processes." << "/n";
-
 }
 
 bool System::ProcessIsAlive(Process& input_process) {
     auto pid_found_in = std::ranges::find(current_pids, input_process.getPid());
-    if (pid_found_in != current_pids.end()){
+    if (pid_found_in != current_pids.end() && !files.getStatFile().empty() && !files.getStatusFile().empty() && !files.getCmdLineFile().empty()){
         return true;
     }
     else {
