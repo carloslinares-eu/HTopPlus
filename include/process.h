@@ -18,7 +18,6 @@ using std::vector;
 class Process {
 public:
     explicit Process(int input_pid, string input_user, string input_command, Processor &system_cpu);
-    // Process needs a reference to OSFiles for accessing psw file.
 
     [[nodiscard]] int getPid() const {return pid;}
     string getUser() {return user;};
@@ -26,6 +25,8 @@ public:
     [[nodiscard]] float getCpuUtilization() const {return cpu_utilization;}
     std::string getRamUtilization() {return ram_utilization;}
     [[nodiscard]] long int getUpTime() const {return uptime;}
+
+    PIDFiles& getFiles() {return files;}
 
     bool operator<(Process const &a) const;  // TODO: See src/process.cpp
 

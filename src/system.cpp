@@ -62,7 +62,6 @@ void System::UpdateAliveProcesses() {
     }
 }
 
-
 void System::AddNewProcesses() {
     number_of_added_process = 0;
     if (!new_pids.empty()) {
@@ -78,7 +77,12 @@ void System::AddNewProcesses() {
 
 bool System::ProcessIsAlive(Process& input_process) {
     auto pid_found_in = std::ranges::find(current_pids, input_process.getPid());
-    if (pid_found_in != current_pids.end() && !files.getStatFile().empty() && !files.getStatusFile().empty() && !files.getCmdLineFile().empty()){
+    bool folder_in_proc_dir = pid_found_in != current_pids.end();
+    bool stat_file_is_not_empty = !input_process.getFiles().getStatFile().empty();
+    bool status_file_is_not_empty = !input_process.getFiles().getStatusFile().empty();
+    bool cmdline_file_is_not_empty = !input_process.getFiles().getCmdLineFile().empty();
+
+    if (folder_in_proc_dir && stat_file_is_not_empty && status_file_is_not_empty && cmdline_file_is_not_empty){
         return true;
     }
     else {

@@ -51,7 +51,6 @@ void Process::updateJiffies() {
     sum_current_process_jiffies = LP::ActiveJiffiesProcess(files.getStatFile());
 }
 
-
 void Process::saveJiffiesForNextCycle() {
     sum_previous_process_jiffies = sum_current_process_jiffies;
 }
