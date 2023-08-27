@@ -89,7 +89,7 @@ bool isInteger(const string& input_string);
 
 // getSystemProcesses
 string Command(int pid);
-string Ram(int pid);
+string ProcessUsedRam(const vector<vector<string>>& kStatusFile);
 string Uid(int pid);
 string User(int pid, const vector<vector<string>>& kPasswordFile);
 long int UpTime(vector<vector<string>>& kPdiStatFile);

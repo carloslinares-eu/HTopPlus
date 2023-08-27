@@ -17,6 +17,7 @@ public:
     explicit PIDFiles(int& pid);
 
     vector<vector<string>>& getStatFile() {return KStatFile;}
+    vector<vector<string>>& getStatusFile() {return kStatusFile;}
 
     void ReadPIDFiles();
 

@@ -40,7 +40,6 @@ private:
     vector<int> previous_cycle_pids;
     vector<int> new_pids;
 
-
     void UpdateListOfPIDs();
     void GenerateProcesses();
     void UpdateAliveProcesses();

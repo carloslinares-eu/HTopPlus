@@ -61,8 +61,8 @@ void System::UpdateAliveProcesses() {
         }
     }
 
-    std::cout << "Updated " << number_of_updated_process << " processes.";
-    std::cout << "Removed " << number_of_registered_processes - number_of_updated_process << "processes.";
+    std::cout << "Updated " << number_of_updated_process << " processes." << "/n";
+    std::cout << "Removed " << number_of_registered_processes - number_of_updated_process << " processes." << "/n";
 }
 
 
@@ -76,7 +76,7 @@ void System::AddNewProcesses() {
         processes.push_back(new_process);
         number_of_added_process++;
     }
-    std::cout << "Added  " << number_of_added_process << "processes.";
+    std::cout << "Added  " << number_of_added_process << " processes." << "/n";
 
 }
 

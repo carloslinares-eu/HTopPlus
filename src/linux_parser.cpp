@@ -140,9 +140,21 @@ string LinuxParser::Command(int pid) {
     }
 }
 
-// TODO: Read and return the memory used by a process
-// REMOVE: [[maybe_unused]] once you define the function
-string LinuxParser::Ram(int pid[[maybe_unused]]) { return "mem"; }
+string LinuxParser::ProcessUsedRam(const vector<vector<string>>& kStatusFile) {
+    long unsigned int process_ram_usage_kb = 0, process_ram_usage_mb;
+    unsigned int const kb_in_mb = 1024;
+    for (vector<string> line: kStatusFile) {
+        string key = line[0];
+        if (key != "VmSize:") {
+            continue;
+        } else {
+            process_ram_usage_kb = std::stol(line[1]);
+            break;
+        }
+    }
+    process_ram_usage_mb = process_ram_usage_kb / kb_in_mb;
+    return std::to_string(process_ram_usage_mb);
+}
 
 
 string LinuxParser::Uid(int pid) {

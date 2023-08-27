@@ -53,7 +53,7 @@ void Process::updateCpuUtilization() {
 }
 
 void Process::updateRamUtilization() {
-
+    ram_utilization = LP::ProcessUsedRam(files.getStatusFile());
 }
 
 void Process::updateUptime() {
