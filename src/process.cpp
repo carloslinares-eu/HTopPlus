@@ -18,6 +18,7 @@ files(input_pid) {
     uptime = 0;
     sum_current_process_jiffies = LinuxParser::ActiveJiffiesProcess(files.getStatFile());
     sum_previous_process_jiffies = sum_current_process_jiffies;
+    updateDynamicInformation();
 }
 
 // TODO: Return this process's memory utilization
