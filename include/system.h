@@ -5,12 +5,14 @@
 #include <vector>
 #include <ranges>
 #include <algorithm>
+#include <set>
 
 #include "os_files.h"
 #include "processor.h"
 #include "process.h"
 
-
+using std::set;
+using std::size_t;
 using std::string;
 using std::vector;
 
@@ -18,15 +20,15 @@ class System {
 public:
     System();
 
-    Processor &getSystemCPU();
+    Processor &getSystemCPU() {return cpu;}
     vector<Process> &getSystemProcesses();
 
-    float getMemoryUtilization();
+    float getMemoryUtilization() {return LinuxParser::MemoryUtilization(files.getMemInfoFile());}
     long getUpTime();
-    int getTotalProcesses();
-    int getRunningProcesses();
-    string getKernel();
-    string getOperatingSystem();
+    int getTotalProcesses() {return LinuxParser::TotalProcesses(files.getCpuStatFile());}
+    int getRunningProcesses() {return LinuxParser::RunningProcesses(files.getCpuStatFile());}
+    string getKernel() {return LinuxParser::Kernel(files.getVersionFile());}
+    string getOperatingSystem() {return LinuxParser::OperatingSystem(files.getOSFileParsed());}
 
     void Running();
 
