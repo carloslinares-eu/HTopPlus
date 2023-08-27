@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+#include <ranges>
+#include <algorithm>
 
 #include "os_files.h"
 #include "processor.h"
@@ -32,11 +34,17 @@ private:
     OSFiles files = {};
     Processor cpu;
     vector<Process> processes = {};
-    vector<int> pids;
+    vector<int> current_pids;
+    vector<int> previous_cycle_pids;
+    vector<int> new_pids;
 
 
     void UpdateListOfPIDs();
     void GenerateProcesses();
+    void UpdateAliveProcesses();
+    void AddNewProcesses();
+
+    bool ProcessIsAlive(Process& input_process);
 };
 
 #endif
