@@ -6,10 +6,12 @@
 #include <ranges>
 #include <algorithm>
 #include <set>
+#include <iostream>
 
 #include "os_files.h"
 #include "processor.h"
 #include "process.h"
+#include "linux_parser.h"
 
 using std::set;
 using std::size_t;
@@ -20,13 +22,14 @@ class System {
 public:
     System();
 
-    Processor &getSystemCPU() {return cpu;}
-    vector<Process> &getSystemProcesses();
+    Processor* getSystemCPU() {return &cpu;}
+    vector<Process> &getSystemProcesses() {return processes;};
 
     float getMemoryUtilization() {return LinuxParser::MemoryUtilization(files.getMemInfoFile());}
-    long getUpTime();
+    long getUpTime(){return LinuxParser::UpTimeTotal(files.getUptimeFile());}
     int getTotalProcesses() {return LinuxParser::TotalProcesses(files.getCpuStatFile());}
     int getRunningProcesses() {return LinuxParser::RunningProcesses(files.getCpuStatFile());}
+
     string getKernel() {return LinuxParser::Kernel(files.getVersionFile());}
     string getOperatingSystem() {return LinuxParser::OperatingSystem(files.getOSFileParsed());}
 
@@ -40,13 +43,14 @@ private:
     vector<int> previous_cycle_pids;
     vector<int> new_pids;
 
-    unsigned int number_of_updated_process = 0;
-    unsigned int number_of_added_process = 0;
+    unsigned int number_of_updated_process{};
+    unsigned int number_of_added_process{};
 
     void UpdateListOfPIDs();
     void GenerateProcesses();
     void UpdateAliveProcesses();
     void AddNewProcesses();
+    void OrderProcesses();
 
     bool ProcessIsAlive(Process& input_process);
 };

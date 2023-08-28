@@ -70,7 +70,7 @@ long int LinuxParser::UpTimeTotal(const vector<vector<string>> &kUptimeFile) {
     return uptime_effective;
 }
 
-long LinuxParser::Jiffies(const vector<vector<string>> &kStatFile) {
+[[maybe_unused]] long LinuxParser::Jiffies(const vector<vector<string>> &kStatFile) {
     long system_jiffies;
     string user = kStatFile[0][1];
     system_jiffies = std::stol(user);
@@ -97,15 +97,6 @@ long LinuxParser::ActiveJiffiesProcess(const vector<vector<string>> &kStatFile) 
     long int kernel_children_time = std::stoi(kStatFile[0][16]);
     return (user_time + kernel_time + user_children_time + kernel_children_time);
 }
-
-// TODO: Read and return the number of active jiffies for the system
-long LinuxParser::ActiveJiffies(const vector<vector<string>> &kStatFile) { return 0; }
-
-// TODO: Read and return the number of idle jiffies for the system
-long LinuxParser::IdleJiffies(const vector<vector<string>> &kStatFile) { return 0; }
-
-// TODO: Read and return cpu utilization
-vector<string> LinuxParser::CpuUtilization() { return {}; }
 
 int LinuxParser::TotalProcesses(const vector<vector<string>> &kStatFile) {
     for (vector<string> line: kStatFile) {
@@ -265,7 +256,6 @@ vector<vector<string>> LinuxParser::ParsePasswordFile(const vector<vector<string
 bool LinuxParser::isInteger(const std::string &input_string) {
     try {
         size_t pos;
-        int result = std::stoi(input_string, &pos);
         return pos == input_string.size();
     } catch (const std::invalid_argument&) {
         return false;

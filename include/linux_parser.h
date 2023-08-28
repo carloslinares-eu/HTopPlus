@@ -72,7 +72,8 @@ enum CPUStates {
 
 // processes
 std::vector<string> CpuUtilization();
-long Jiffies(const vector<vector<string>>& kStatFile);
+
+    [[maybe_unused]] [[maybe_unused]] long Jiffies(const vector<vector<string>>& kStatFile);
 long ActiveJiffiesProcess(const vector<vector<string>>& kStatFile);
 long ActiveJiffies(const vector<vector<string>>& kStatFile);
 long IdleJiffies(const vector<vector<string>>& kStatFile);

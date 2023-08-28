@@ -17,7 +17,7 @@ using std::vector;
 
 class Process {
 public:
-    explicit Process(int input_pid, string input_user, string input_command, Processor &system_cpu);
+    Process(int input_pid, string input_user, string input_command, Processor* system_cpu);
 
     [[nodiscard]] int getPid() const {return pid;}
     string getUser() {return user;};
@@ -28,16 +28,16 @@ public:
 
     PIDFiles& getFiles() {return files;}
 
-    bool operator<(Process const &a) const;  // TODO: See src/process.cpp
+    bool operator<(Process const &process2) const  {return getCpuUtilization() < process2.getCpuUtilization();}
 
     void updateDynamicInformation();
 
 private:
-    const int pid;
-    const std::string user;
-    const std::string command;
+    int pid;
+    std::string user;
+    std::string command;
 
-    Processor& cpu;
+    Processor* cpu;
 
     PIDFiles files;
 

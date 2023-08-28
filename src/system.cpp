@@ -1,6 +1,4 @@
-#include "process.h"
 #include "system.h"
-#include "linux_parser.h"
 
 System::System() : cpu(files) { // cpu (Processor class) constructor needs a reference to the files.
     files.ReadSystemFiles();
@@ -8,17 +6,14 @@ System::System() : cpu(files) { // cpu (Processor class) constructor needs a ref
     GenerateProcesses();
 }
 
-vector<Process> &System::getSystemProcesses() { return processes; }
-
 void System::Running() {
     files.ReadSystemFiles();
     cpu.Running();
     UpdateListOfPIDs();
     UpdateAliveProcesses();
     AddNewProcesses();
+    OrderProcesses();
 }
-
-long int System::getUpTime() { return LinuxParser::UpTimeTotal(files.getUptimeFile()); }
 
 void System::UpdateListOfPIDs() {
     previous_cycle_pids = current_pids;
@@ -35,7 +30,6 @@ void System::UpdateListOfPIDs() {
 }
 
 void System::GenerateProcesses() {
-    processes.clear();  // Wiping out all the information of processes before populating it again.
     for (int pid : current_pids) {
         string user = LinuxParser::User(pid, files.getPasswordFileParsed());
         string command = LinuxParser::Command(pid);
@@ -74,6 +68,21 @@ void System::AddNewProcesses() {
         }
     }
 }
+
+void System::OrderProcesses() {
+    unsigned int vector_size = processes.size();
+    if (vector_size != 0) {
+        for (size_t i = 0; i < vector_size - 1; ++i) {
+            for (size_t j = 0; j < vector_size - i - 1; ++j) {
+                if (processes[j + 1] < processes[j]) {
+                    Process temp = processes[j];
+                    processes[j] = processes[j + 1];
+                }
+            }
+        }
+    }
+}
+
 
 bool System::ProcessIsAlive(Process& input_process) {
     auto pid_found_in = std::ranges::find(current_pids, input_process.getPid());

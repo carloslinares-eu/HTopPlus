@@ -24,7 +24,7 @@ public:
     void ReadPIDFiles();
 
 private:
-    const string pid_folder_path_in_proc;
+    string pid_folder_path_in_proc;
 
     vector<vector<string>> kCmdLineFile;
     vector<vector<string>> KStatFile;
