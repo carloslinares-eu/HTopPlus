@@ -22,8 +22,8 @@ class System {
 public:
     System();
 
-    Processor* getSystemCPU() {return &cpu;}
-    vector<Process> &getSystemProcesses() {return processes;};
+    Processor& getSystemCPU() {return cpu;}
+    vector<Process>& getSystemProcesses() {return processes;};
 
     float getMemoryUtilization() {return LinuxParser::MemoryUtilization(files.getMemInfoFile());}
     long getUpTime(){return LinuxParser::UpTimeTotal(files.getUptimeFile());}
@@ -39,6 +39,7 @@ private:
     OSFiles files = {};
     Processor cpu;
     vector<Process> processes = {};
+
     vector<int> current_pids;
     vector<int> previous_cycle_pids;
     vector<int> new_pids;

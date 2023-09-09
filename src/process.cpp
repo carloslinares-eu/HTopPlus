@@ -1,7 +1,7 @@
 #include "process.h"
 
 
-Process::Process(int input_pid, string input_user, string input_command, Processor* system_cpu) :
+Process::Process(int input_pid, string input_user, string input_command, Processor& system_cpu) :
 pid(input_pid),
 user(std::move(input_user)),
 command(std::move(input_command)),
@@ -25,7 +25,7 @@ void Process::updateDynamicInformation() {
 
 void Process::updateCpuUtilization() {
     long int current_jiffies_increment;
-    long int latest_cpu_increment = cpu->getUsageIncrement();
+    long int latest_cpu_increment = cpu.getUsageIncrement();
 
     updateJiffies();
     current_jiffies_increment = sum_current_process_jiffies - sum_previous_process_jiffies;

@@ -26,7 +26,6 @@ using std::to_string;
 
 namespace fs = std::filesystem;
 
-
 namespace LinuxParser {
 // Paths
 const string kProcDirectory{"/proc"};
@@ -95,5 +94,7 @@ string Uid(int pid);
 string User(int pid, const vector<vector<string>>& kPasswordFile);
 long int UpTime(vector<vector<string>>& kPdiStatFile);
 };  // namespace LinuxParser
+
+
 
 #endif

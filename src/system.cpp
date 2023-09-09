@@ -10,23 +10,13 @@ void System::Running() {
     files.ReadSystemFiles();
     cpu.Running();
     UpdateListOfPIDs();
-    UpdateAliveProcesses();
-    AddNewProcesses();
     OrderProcesses();
 }
 
 void System::UpdateListOfPIDs() {
     previous_cycle_pids = current_pids;
     current_pids = LinuxParser::Pids();
-
-    new_pids = current_pids;
-    new_pids.erase(
-            std::remove_if(new_pids.begin(), new_pids.end(),
-                           [&](int value) {
-                return std::find(previous_cycle_pids.begin(), previous_cycle_pids.end(),
-                                 value) != previous_cycle_pids.end();
-            }),
-                       new_pids.end());
+    files.getUpdatedListOfPIDs(current_pids);
 }
 
 void System::GenerateProcesses() {
@@ -35,37 +25,6 @@ void System::GenerateProcesses() {
         string command = LinuxParser::Command(pid);
         Process new_process(pid, user, command, getSystemCPU());
         processes.push_back(new_process);
-    }
-}
-
-void System::UpdateAliveProcesses() {
-    number_of_updated_process = 0;
-    vector<Process> tmp_cp_processes = processes;
-    processes.clear();
-
-    unsigned int const number_of_registered_processes = tmp_cp_processes.size();
-    for (size_t vector_index = 0; vector_index != number_of_registered_processes; ++vector_index) {
-        Process current_process = tmp_cp_processes[vector_index];
-        if (ProcessIsAlive(current_process)) {
-            current_process.updateDynamicInformation();
-            processes.push_back(current_process);
-            number_of_updated_process++;
-        } else {
-            continue;
-        }
-    }
-}
-
-void System::AddNewProcesses() {
-    number_of_added_process = 0;
-    if (!new_pids.empty()) {
-        for (int pid : new_pids) {
-            string user = LinuxParser::User(pid, files.getPasswordFileParsed());
-            string command = LinuxParser::Command(pid);
-            Process new_process(pid, user, command, getSystemCPU());
-            processes.push_back(new_process);
-            number_of_added_process++;
-        }
     }
 }
 

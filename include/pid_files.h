@@ -20,15 +20,17 @@ public:
     vector<vector<string>>& getStatusFile() {return kStatusFile;}
     vector<vector<string>>& getCmdLineFile() {return kCmdLineFile;}
 
-
     void ReadPIDFiles();
 
 private:
     string pid_folder_path_in_proc;
 
+    // System wide files
     vector<vector<string>> kCmdLineFile;
     vector<vector<string>> KStatFile;
     vector<vector<string>> kStatusFile;
+
+    // Processes files
 };
 
 
