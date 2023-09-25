@@ -36,7 +36,7 @@ public:
     void Running();
 
 private:
-    OSFiles files = {};
+    OSFiles files;
     Processor cpu;
     vector<Process> processes = {};
 

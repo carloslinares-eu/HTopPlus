@@ -1,6 +1,6 @@
 #include "system.h"
 
-System::System() : cpu(files) { // cpu (Processor class) constructor needs a reference to the files.
+System::System() : files(current_pids), cpu(files) { // cpu (Processor class) constructor needs a reference to the files.
     files.ReadSystemFiles();
     UpdateListOfPIDs();
     GenerateProcesses();
@@ -9,7 +9,11 @@ System::System() : cpu(files) { // cpu (Processor class) constructor needs a ref
 void System::Running() {
     files.ReadSystemFiles();
     cpu.Running();
+    // TODO: Not getting the list of PIDs. Fix this issue.
     UpdateListOfPIDs();
+    files.getUpdatedListOfPIDs(current_pids);
+    files.Running();
+    GenerateProcesses();
     OrderProcesses();
 }
 
@@ -20,10 +24,13 @@ void System::UpdateListOfPIDs() {
 }
 
 void System::GenerateProcesses() {
-    for (int pid : current_pids) {
-        string user = LinuxParser::User(pid, files.getPasswordFileParsed());
-        string command = LinuxParser::Command(pid);
-        Process new_process(pid, user, command, getSystemCPU());
+    for (const LP::PidFiles& current_pid_files : files.getAllPidsFiles()) {
+        LP::ProcessInputInformation current_process_input_information{
+                current_pid_files,
+                files.getPasswordFileParsed(),
+                cpu.getUsageIncrement()
+        };
+        Process new_process(current_process_input_information);
         processes.push_back(new_process);
     }
 }
@@ -42,18 +49,3 @@ void System::OrderProcesses() {
     }
 }
 
-
-bool System::ProcessIsAlive(Process& input_process) {
-    auto pid_found_in = std::ranges::find(current_pids, input_process.getPid());
-    bool folder_in_proc_dir = pid_found_in != current_pids.end();
-    bool stat_file_is_not_empty = !input_process.getFiles().getStatFile().empty();
-    bool status_file_is_not_empty = !input_process.getFiles().getStatusFile().empty();
-    bool cmdline_file_is_not_empty = !input_process.getFiles().getCmdLineFile().empty();
-
-    if (folder_in_proc_dir && stat_file_is_not_empty && status_file_is_not_empty && cmdline_file_is_not_empty){
-        return true;
-    }
-    else {
-        return false;
-    }
-}

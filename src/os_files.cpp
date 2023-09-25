@@ -4,7 +4,7 @@
 void OSFiles::Running() {
     ReadSystemFiles();
     ParseSystemFiles();
-    ReadPidsFile();
+    ReadPidsFiles();
 }
 
 void OSFiles::ReadSystemFiles() {
@@ -21,7 +21,7 @@ void OSFiles::ParseSystemFiles() {
     kPasswordFileParsed = LP::ParsePasswordFile(kPasswordFileRaw);
 }
 
-void OSFiles::ReadPidsFile() {
+void OSFiles::ReadPidsFiles() {
     for (int pid : system_pids) {
         current_pid = pid;
 
@@ -44,7 +44,7 @@ void OSFiles::ReadPidsFile() {
 
         }
 
-        PidFiles current_pid_files {pid,  pid_has_all_files,
+        LP::PidFiles current_pid_files {current_pid,  pid_has_all_files,
                                     current_pid_cmdline_file,
                                     current_pid_stat_file,
                                     current_pid_status_file};

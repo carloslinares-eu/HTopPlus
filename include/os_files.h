@@ -18,7 +18,7 @@ public:
 
     void ReadSystemFiles();
     void ParseSystemFiles();
-    void ReadPidsFile();
+    void ReadPidsFiles();
 
     void Running();
 
@@ -28,6 +28,8 @@ public:
     vector<vector<string>>& getVersionFile() {return kVersionFile;}
     vector<vector<string>>& getOSFileParsed() {return kOSFileParsed;}
     vector<vector<string>>& getPasswordFileParsed() {return kPasswordFileParsed;}
+
+    vector<LP::PidFiles> getAllPidsFiles() {return all_pids_files;}
 
     void getUpdatedListOfPIDs(vector<int>& updated_pids) {system_pids = updated_pids;}
 
@@ -44,24 +46,16 @@ private:
     vector<vector<string>> kOSFileParsed;
     vector<vector<string>> kPasswordFileParsed;
 
-    struct PidFiles {
-        const int Pid;
-        bool all_files_present;
-        vector<vector<string>> kPidCmdLineFile;
-        vector<vector<string>> kPidStatFile;
-        vector<vector<string>> kPidStatusFile;
-    };
-
-    int current_pid;
+    int current_pid{};
     string current_pid_path;
     vector<string> files_paths_in_current_pid;
-    bool pid_has_all_files;
+    bool pid_has_all_files{};
 
     vector<vector<string>> current_pid_cmdline_file;
     vector<vector<string>> current_pid_stat_file;
     vector<vector<string>> current_pid_status_file;
 
-    vector<PidFiles> all_pids_files;
+    vector<LP::PidFiles> all_pids_files;
 
     enum needed_files_in_pid {cmdline = 0,
             stat = 1,

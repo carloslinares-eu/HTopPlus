@@ -30,8 +30,8 @@ class Processor {
     std::vector<long int> current_cpus_jiffies;
     std::vector<long int> previous_cycle_cpus_jiffies;
 
-    long int current_usage_increment;
-    float utilization;
+    long int current_usage_increment{};
+    float utilization{};
 };
 
 #endif

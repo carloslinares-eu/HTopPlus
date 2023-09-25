@@ -1,22 +1,16 @@
 #include "process.h"
+#include <utility>
 
 
-Process::Process(int input_pid, string input_user, string input_command, Processor& system_cpu) :
-pid(input_pid),
-user(std::move(input_user)),
-command(std::move(input_command)),
-cpu(system_cpu),
-files(input_pid) {
-    cpu_utilization = 0;
-    uptime = 0;
-    sum_current_process_jiffies = LinuxParser::ActiveJiffiesProcess(files.getStatFile());
-    sum_previous_process_jiffies = sum_current_process_jiffies;
-    updateDynamicInformation();
+Process::Process(LP::ProcessInputInformation  process_constructor_input) :
+input_info(std::move(process_constructor_input)){
+    pid = input_info.current_process_files.Pid;
+    process_is_active = input_info.current_process_files.all_files_present;
+
 }
 
 void Process::updateDynamicInformation() {
-    files.ReadPIDFiles();
-    if (!files.getStatFile().empty() && !files.getStatusFile().empty() && !files.getCmdLineFile().empty()) {
+    if (process_is_active) {
         updateCpuUtilization();
         updateRamUtilization();
         updateUptime();
@@ -25,7 +19,7 @@ void Process::updateDynamicInformation() {
 
 void Process::updateCpuUtilization() {
     long int current_jiffies_increment;
-    long int latest_cpu_increment = cpu.getUsageIncrement();
+    long int latest_cpu_increment = input_info.current_usage_increment;
 
     updateJiffies();
     current_jiffies_increment = sum_current_process_jiffies - sum_previous_process_jiffies;
@@ -36,15 +30,18 @@ void Process::updateCpuUtilization() {
 }
 
 void Process::updateRamUtilization() {
-    ram_utilization = LP::ProcessUsedRam(files.getStatusFile());
+    LP::TextFile StatusFile = input_info.current_process_files.kPidStatusFile;
+    ram_utilization = LP::ProcessUsedRam(StatusFile);
 }
 
 void Process::updateUptime() {
-    uptime = LP::UpTime(files.getStatFile());
+    LP::TextFile StatFile = input_info.current_process_files.kPidStatFile;
+    uptime = LP::UpTime(StatFile);
 }
 
 void Process::updateJiffies() {
-    sum_current_process_jiffies = LP::ActiveJiffiesProcess(files.getStatFile());
+    LP::TextFile StatFile = input_info.current_process_files.kPidStatFile;
+    sum_current_process_jiffies = LP::ActiveJiffiesProcess(StatFile);
 }
 
 void Process::saveJiffiesForNextCycle() {

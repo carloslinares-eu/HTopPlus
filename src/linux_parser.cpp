@@ -1,7 +1,8 @@
 #include "linux_parser.h"
 
+namespace LP = LinuxParser;
 
-string LinuxParser::OperatingSystem(const vector<vector<string>> &kOSFileRefParsed) {
+string LinuxParser::OperatingSystem(const LP::TextFile &kOSFileRefParsed) {
     for (vector<string> line: kOSFileRefParsed) {
         string key = line[0];
         if (key == "PRETTY_NAME") {
@@ -12,7 +13,7 @@ string LinuxParser::OperatingSystem(const vector<vector<string>> &kOSFileRefPars
     }
 }
 
-string LinuxParser::Kernel(const vector<vector<string>> &kVersionFileRef) {
+string LinuxParser::Kernel(const LP::TextFile &kVersionFileRef) {
     return kVersionFileRef[0][2];
 }
 
@@ -29,7 +30,7 @@ vector<int> LinuxParser::Pids() {
     return pids;
 }
 
-int LinuxParser::TotalMemory(const vector<vector<string>> &kMemInfoFile) {
+int LinuxParser::TotalMemory(const LP::TextFile &kMemInfoFile) {
     for (vector<string> line: kMemInfoFile) {
         string key = line[0];
         if (key == "MemTotal:") {
@@ -49,28 +50,28 @@ int LinuxParser::AvailableMemory(const vector<vector<std::string>> &kMemInfoFile
     }
 }
 
-float LinuxParser::MemoryUtilization(const vector<vector<string>> &kMemInfoFile) {
+float LinuxParser::MemoryUtilization(const LP::TextFile &kMemInfoFile) {
     int available_memory = LinuxParser::AvailableMemory(kMemInfoFile);
     int total_memory = LinuxParser::TotalMemory(kMemInfoFile);
     float memory_utilization = 1.0f - static_cast<float>(available_memory) / static_cast<float>(total_memory);
     return memory_utilization;
 }
 
-long int LinuxParser::UpTimeTotal(const vector<vector<string>> &kUptimeFile) {
+long int LinuxParser::UpTimeTotal(const LP::TextFile &kUptimeFile) {
     long int uptime_total;
     string uptime_total_s = kUptimeFile[0][0];
     std::from_chars(uptime_total_s.data(), uptime_total_s.data() + uptime_total_s.size(), uptime_total);
     return uptime_total;
 }
 
-[[maybe_unused]] long int LinuxParser::UpTimeEffective(const vector<vector<string>> &kUptimeFile) {
+[[maybe_unused]] long int LinuxParser::UpTimeEffective(const LP::TextFile &kUptimeFile) {
     long int uptime_effective;
     string uptime_effective_s = kUptimeFile[0][1];
     std::from_chars(uptime_effective_s.data(), uptime_effective_s.data() + uptime_effective_s.size(), uptime_effective);
     return uptime_effective;
 }
 
-[[maybe_unused]] long LinuxParser::Jiffies(const vector<vector<string>> &kStatFile) {
+[[maybe_unused]] long LinuxParser::Jiffies(const LP::TextFile &kStatFile) {
     long system_jiffies;
     string user = kStatFile[0][1];
     system_jiffies = std::stol(user);
@@ -78,7 +79,7 @@ long int LinuxParser::UpTimeTotal(const vector<vector<string>> &kUptimeFile) {
 }
 
 
-std::vector<long int> LinuxParser::getAggregatedCPUInfo(const vector<vector<string>> &kStatFile) {
+std::vector<long int> LinuxParser::getAggregatedCPUInfo(const LP::TextFile &kStatFile) {
     std::vector<long int> all_cpus_jiffies;
     for (const string &jiffies_value: kStatFile[0]) {
         if (jiffies_value == "cpu") {
@@ -90,7 +91,7 @@ std::vector<long int> LinuxParser::getAggregatedCPUInfo(const vector<vector<stri
     return all_cpus_jiffies;
 }
 
-long LinuxParser::ActiveJiffiesProcess(const vector<vector<string>> &kStatFile) {
+long LinuxParser::ActiveJiffiesProcess(const LP::TextFile &kStatFile) {
     long int user_time = std::stoi(kStatFile[0][13]);
     long int kernel_time = std::stoi(kStatFile[0][14]);
     long int user_children_time = std::stoi(kStatFile[0][15]);
@@ -98,7 +99,7 @@ long LinuxParser::ActiveJiffiesProcess(const vector<vector<string>> &kStatFile) 
     return (user_time + kernel_time + user_children_time + kernel_children_time);
 }
 
-int LinuxParser::TotalProcesses(const vector<vector<string>> &kStatFile) {
+int LinuxParser::TotalProcesses(const LP::TextFile &kStatFile) {
     for (vector<string> line: kStatFile) {
         string key = line[0];
         if (key == "processes") {
@@ -109,7 +110,7 @@ int LinuxParser::TotalProcesses(const vector<vector<string>> &kStatFile) {
     }
 }
 
-int LinuxParser::RunningProcesses(const vector<vector<string>>& kStatFile) {
+int LinuxParser::RunningProcesses(const LP::TextFile& kStatFile) {
     for (vector<string> line: kStatFile) {
         string key = line[0];
         if (key == "procs_running") {
@@ -122,7 +123,7 @@ int LinuxParser::RunningProcesses(const vector<vector<string>>& kStatFile) {
 
 string LinuxParser::Command(int pid) {
     string cmd_line_file_path = kProcDirectory + "/" + std::to_string(pid) + kCmdlineFilename;
-    vector<vector<string>> cmd_line_file = ReadTextFile(cmd_line_file_path);
+    LP::TextFile cmd_line_file = ReadTextFile(cmd_line_file_path);
     if (cmd_line_file.empty()) {
         return "Unknown";
     }
@@ -131,7 +132,7 @@ string LinuxParser::Command(int pid) {
     }
 }
 
-string LinuxParser::ProcessUsedRam(const vector<vector<string>>& kStatusFile) {
+string LinuxParser::ProcessUsedRam(const LP::TextFile& kStatusFile) {
     long unsigned int process_ram_usage_kb = 0, process_ram_usage_mb;
     unsigned int const kb_in_mb = 1024;
     for (vector<string> line: kStatusFile) {
@@ -150,11 +151,11 @@ string LinuxParser::ProcessUsedRam(const vector<vector<string>>& kStatusFile) {
 
 string LinuxParser::Uid(int pid) {
     string status_file_path = kProcDirectory + "/" + std::to_string(pid) + kStatusFilename;
-    vector<vector<string>> pid_status_file = ReadTextFile (status_file_path);
+    LP::TextFile pid_status_file = ReadTextFile (status_file_path);
     return pid_status_file[8][1];
 }
 
-string LinuxParser::User(int pid, const vector<vector<string>>& kPasswordFileParsed) {
+string LinuxParser::User(int pid, const LP::TextFile& kPasswordFileParsed) {
     string user_id = Uid(pid);
     for (vector<string> user_information : kPasswordFileParsed) {
         string name = user_information[0];
@@ -170,7 +171,7 @@ string LinuxParser::User(int pid, const vector<vector<string>>& kPasswordFilePar
 }
 
 
-long LinuxParser::UpTime(vector<vector<string>>& kPdiStatFile) {
+long LinuxParser::UpTime(LP::TextFile& kPdiStatFile) {
     long int active_jiffies = std::stoi(kPdiStatFile[0][21]);
     long int active_time_seconds = active_jiffies / sysconf(_SC_CLK_TCK);
     return active_time_seconds;
@@ -178,8 +179,8 @@ long LinuxParser::UpTime(vector<vector<string>>& kPdiStatFile) {
 
 
 // Generic functions to follow the DRY principle
-vector<vector<string>> LinuxParser::ReadTextFile(const string &file_path) {
-    vector<vector<string>> read_file;
+LP::TextFile LinuxParser::ReadTextFile(const string &file_path) {
+    LP::TextFile read_file;
     ifstream file_stream(file_path);
     if (file_stream.is_open()) {
         string current_line;
@@ -202,8 +203,8 @@ vector<string> LinuxParser::ReadLine(const std::string &line) {
     return read_line;
 }
 
-vector<vector<string>> LinuxParser::ParseOSFile(const vector<vector<string>> &kOSFileRefRaw) {
-    vector<vector<string>> parsed_os_file;
+LP::TextFile LinuxParser::ParseOSFile(const LP::TextFile &kOSFileRefRaw) {
+    LP::TextFile parsed_os_file;
 
     for (const vector<string> &line: kOSFileRefRaw) {
         // kOSFile is expected to have only one element in the vector representing the line.
@@ -228,8 +229,8 @@ vector<vector<string>> LinuxParser::ParseOSFile(const vector<vector<string>> &kO
     return parsed_os_file;
 }
 
-vector<vector<string>> LinuxParser::ParsePasswordFile(const vector<vector<string>> &kPasswordFileRefRaw) {
-    vector<vector<string>> parsed_pass_file;
+LP::TextFile LinuxParser::ParsePasswordFile(const LP::TextFile &kPasswordFileRefRaw) {
+    LP::TextFile parsed_pass_file;
 
     for (const vector<string> &line: kPasswordFileRefRaw) {
         // kPassFile is expected to have only one element in the vector representing the line.
