@@ -19,11 +19,19 @@ string LinuxParser::Kernel(const LP::TextFile &kVersionFileRef) {
 
 vector<int> LinuxParser::Pids() {
     vector<int> pids;
-    vector<string> folderNames;
+    auto proc_dir_iterator = fs::directory_iterator(kProcDirectory);
 
-    for (const auto& entry : fs::directory_iterator(kProcDirectory)) {
-        if (fs::is_directory(entry) && isInteger(entry.path().filename())) {
-            pids.push_back(std::stoi(entry.path().filename()));
+    for (const auto& current_directory : proc_dir_iterator) {
+        string current_folder = lastFolderInPath(current_directory.path());
+        try {
+            int current_pid = std::stoi(current_folder);
+            pids.push_back(current_pid);
+        }
+        catch (const std::invalid_argument& error) {
+            continue;
+        }
+        catch (const std::out_of_range& error) {
+            continue;
         }
     }
 
@@ -263,4 +271,12 @@ bool LinuxParser::isInteger(const std::string &input_string) {
     } catch (const std::out_of_range&) {
         return false;
     }
+}
+
+string LinuxParser::lastFolderInPath(const fs::path &input_path) {
+    string last_folder_read;
+    for (auto& current_folder_in_path : input_path) {
+        last_folder_read = current_folder_in_path.string();
+    }
+    return last_folder_read;
 }

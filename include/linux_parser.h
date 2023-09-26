@@ -87,6 +87,7 @@ namespace LinuxParser {
                                                       const string& to_find,
                                                       const string& to_replace_with);
     bool isInteger(const string& input_string);
+    string lastFolderInPath(const fs::path &input_path);
     
     // getSystemProcesses
     string Command(int pid);
