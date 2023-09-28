@@ -2,9 +2,14 @@
 
 
 void OSFiles::Running() {
+    ClearPidsFiles();
     ReadSystemFiles();
     ParseSystemFiles();
     ReadPidsFiles();
+}
+
+void OSFiles::ClearPidsFiles() {
+    all_pids_files.clear();
 }
 
 void OSFiles::ReadSystemFiles() {

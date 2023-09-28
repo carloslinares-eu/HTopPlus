@@ -22,8 +22,11 @@ class Processor {
     void Running();
 
  private:
+    void initializeAggregatedCpuInfo();
     void updateAggregatedCpuInfo();
     void calculateCpuUtilization();
+
+    bool is_first_running_cycle = true;
 
     OSFiles& files_ref;
 

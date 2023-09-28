@@ -43,14 +43,17 @@ private:
     vector<int> current_pids;
     vector<int> previous_cycle_pids;
     vector<int> new_pids;
+    vector<int> dead_pids;
 
     unsigned int number_of_updated_process{};
     unsigned int number_of_added_process{};
 
-    void UpdateListOfPIDs();
-    void GenerateProcesses();
+    void UpdateListOfCurrentPIDs();
+    void UpdateListOfNewPids();
+    void UpdateListOfDeadPids();
+    void RemoveDeadProcesses();
     void UpdateAliveProcesses();
-    void AddNewProcesses();
+    void GenerateNewProcesses();
     void OrderProcesses();
 
     bool ProcessIsAlive(Process& input_process);

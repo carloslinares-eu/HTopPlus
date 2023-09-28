@@ -23,6 +23,9 @@ vector<int> LinuxParser::Pids() {
 
     for (const auto& current_directory : proc_dir_iterator) {
         string current_folder = lastFolderInPath(current_directory.path());
+        if (current_folder.length() < 4) {
+            continue;
+        }
         try {
             int current_pid = std::stoi(current_folder);
             pids.push_back(current_pid);

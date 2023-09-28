@@ -24,7 +24,12 @@ void Process::updateCpuUtilization() {
     updateJiffies();
     current_jiffies_increment = sum_current_process_jiffies - sum_previous_process_jiffies;
 
-    cpu_utilization = static_cast<float>(current_jiffies_increment)/static_cast<float>(latest_cpu_increment);
+    if (latest_cpu_increment == 0) {
+        cpu_utilization = 0.0;
+    }
+    else {
+        cpu_utilization = static_cast<float>(current_jiffies_increment)/static_cast<float>(latest_cpu_increment);
+    }
 
     saveJiffiesForNextCycle();
 }

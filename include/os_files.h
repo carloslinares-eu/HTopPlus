@@ -21,6 +21,7 @@ public:
     void ReadPidsFiles();
 
     void Running();
+    void ClearPidsFiles();
 
     vector<vector<string>>& getCpuStatFile() {return kCpuStatFile;}
     vector<vector<string>>& getUptimeFile() {return kUptimeFile;}
