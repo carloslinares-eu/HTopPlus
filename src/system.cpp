@@ -9,7 +9,6 @@ System::System() : files(current_pids), cpu(files) { // cpu (Processor class) co
 void System::Running() {
     files.ReadSystemFiles();
     cpu.Running();
-    // TODO: Not getting the list of PIDs. Fix this issue.
     UpdateListOfCurrentPIDs();
     UpdateListOfNewPids();
     UpdateListOfDeadPids();
@@ -18,7 +17,7 @@ void System::Running() {
     GenerateNewProcesses();
     RemoveDeadProcesses();
     UpdateAliveProcesses();
-    //OrderProcesses();
+    OrderProcesses();
 }
 
 void System::UpdateListOfCurrentPIDs() {

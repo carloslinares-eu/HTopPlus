@@ -17,26 +17,35 @@ namespace LP = LinuxParser;
 
 class Process {
 public:
-    explicit Process(LP::ProcessInputInformation  process_constructor_input);
+    explicit Process(int pid);
 
     [[nodiscard]] int getPid() const {return pid;}
     string getUser() {return user;};
     string getCommand() {return command;}
     [[nodiscard]] float getCpuUtilization() const {return cpu_utilization;}
-    std::string getRamUtilization() {return ram_utilization;}
+    string getRamUtilization() {return ram_utilization;}
     [[nodiscard]] long int getUpTime() const {return uptime;}
 
+    void setUser(string input_user){user = std::move(input_user);}
+    void setCommand(string input_command){command = std::move(input_command);}
+    void setCpuUtilization(float const &input_cpu_utilization){cpu_utilization = input_cpu_utilization;}
+    void setRamUtilization(string input_ram_utilization){ram_utilization = std::move(input_ram_utilization);}
+    void setUpTime(long int const &input_uptime){uptime = input_uptime;}
+
     bool operator<(const Process& process2) const  {return this->getCpuUtilization() < process2.getCpuUtilization();}
+
     void updateDynamicInformation();
 
 private:
     int pid;
 
-    LP::ProcessInputInformation input_info;
+    LP::TextFile cmdline_file;
+    LP::TextFile stat_file;
+    LP::TextFile status_file;
 
     bool process_is_active{};
 
-    std::string user;
+    string user;
     std::string command;
 
     float cpu_utilization{};
@@ -51,6 +60,8 @@ private:
     void updateUptime();
     void updateJiffies();
     void saveJiffiesForNextCycle();
+
+
 };
 
 #endif

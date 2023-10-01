@@ -95,21 +95,11 @@ namespace LinuxParser {
     string Uid(int pid);
     string User(int pid, const TextFile& kPasswordFile);
     long int UpTime(TextFile& kPdiStatFile);
-    
-    struct PidFiles {
-        int Pid;
-        bool all_files_present;
-        TextFile kPidCmdLineFile;
-        TextFile kPidStatFile;
-        TextFile kPidStatusFile;
-        };
-    
-    
-    struct ProcessInputInformation {
-        PidFiles current_process_files;
-        TextFile password_file_parsed;
-        long int current_usage_increment;
-        };
+
+    enum needed_files_in_pid {cmdline = 0,
+        stat = 1,
+        status = 2};
+
 
 };  // namespace LinuxParser
 

@@ -21,46 +21,28 @@ public:
     void ReadPidsFiles();
 
     void Running();
-    void ClearPidsFiles();
 
-    vector<vector<string>>& getCpuStatFile() {return kCpuStatFile;}
-    vector<vector<string>>& getUptimeFile() {return kUptimeFile;}
-    vector<vector<string>>& getMemInfoFile() {return kMemInfoFile;}
-    vector<vector<string>>& getVersionFile() {return kVersionFile;}
-    vector<vector<string>>& getOSFileParsed() {return kOSFileParsed;}
-    vector<vector<string>>& getPasswordFileParsed() {return kPasswordFileParsed;}
-
-    vector<LP::PidFiles> getAllPidsFiles() {return all_pids_files;}
-
-    void getUpdatedListOfPIDs(vector<int>& updated_pids) {system_pids = updated_pids;}
+    LP::TextFile& getCpuStatFile() {return kCpuStatFile;}
+    LP::TextFile& getUptimeFile() {return kUptimeFile;}
+    LP::TextFile& getMemInfoFile() {return kMemInfoFile;}
+    LP::TextFile& getVersionFile() {return kVersionFile;}
+    LP::TextFile& getOSFileParsed() {return kOSFileParsed;}
+    LP::TextFile& getPasswordFileParsed() {return kPasswordFileParsed;}
 
 private:
     vector<int>& system_pids;
 
-    vector<vector<string>> kCpuStatFile;
-    vector<vector<string>> kUptimeFile;
-    vector<vector<string>> kMemInfoFile;
-    vector<vector<string>> kVersionFile;
-    vector<vector<string>> kOSFileRaw;
-    vector<vector<string>> kPasswordFileRaw;
+    LP::TextFile kCpuStatFile;
+    LP::TextFile kUptimeFile;
+    LP::TextFile kMemInfoFile;
+    LP::TextFile kVersionFile;
+    LP::TextFile kOSFileRaw;
+    LP::TextFile kPasswordFileRaw;
 
-    vector<vector<string>> kOSFileParsed;
-    vector<vector<string>> kPasswordFileParsed;
+    LP::TextFile kOSFileParsed;
+    LP::TextFile kPasswordFileParsed;
 
-    int current_pid{};
-    string current_pid_path;
-    vector<string> files_paths_in_current_pid;
-    bool pid_has_all_files{};
 
-    vector<vector<string>> current_pid_cmdline_file;
-    vector<vector<string>> current_pid_stat_file;
-    vector<vector<string>> current_pid_status_file;
-
-    vector<LP::PidFiles> all_pids_files;
-
-    enum needed_files_in_pid {cmdline = 0,
-            stat = 1,
-            status = 2};
 
     void getPidPath();
     void getFilesPathInPid();
