@@ -75,7 +75,7 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process>& processes,
         mvwprintw(window, ++row, pid_column, "%s", (string(window->_maxx - 2, ' ').c_str()));
 
         mvwprintw(window, row, pid_column, "%s", to_string(processes[i].getPid()).c_str());
-        mvwprintw(window, row, user_column, "%s", processes[i].getUser().c_str());
+        mvwprintw(window, row, user_column, "%s", processes[i].getUser().substr(0, 4).c_str());
         float cpu = processes[i].getCpuUtilization() * 100;
         mvwprintw(window, row, cpu_column, "%s", to_string(cpu).substr(0, 4).c_str());
         mvwprintw(window, row, ram_column, "%s", (std::to_string(processes[i].getRamUtilization())).c_str());
