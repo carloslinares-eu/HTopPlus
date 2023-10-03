@@ -19,5 +19,3 @@ void OSFiles::ParseSystemFiles() {
     kOSFileParsed = LP::ParseOSFile(kOSFileRaw);
     kPasswordFileParsed = LP::ParsePasswordFile(kPasswordFileRaw);
 }
-
-

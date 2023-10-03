@@ -14,11 +14,10 @@ namespace FS = std::filesystem;
 
 class OSFiles {
 public:
-    explicit OSFiles(vector<int> &updated_pids) : system_pids(updated_pids){};
+    OSFiles() = default;
 
     void ReadSystemFiles();
     void ParseSystemFiles();
-    void ReadPidsFiles();
 
     void Running();
 
@@ -30,8 +29,6 @@ public:
     LP::TextFile& getPasswordFileParsed() {return kPasswordFileParsed;}
 
 private:
-    vector<int>& system_pids;
-
     LP::TextFile kCpuStatFile;
     LP::TextFile kUptimeFile;
     LP::TextFile kMemInfoFile;
@@ -42,11 +39,6 @@ private:
     LP::TextFile kOSFileParsed;
     LP::TextFile kPasswordFileParsed;
 
-
-
-    void getPidPath();
-    void getFilesPathInPid();
-    void checkIfPdiHasAllFilesNeeded();
 };
 
 

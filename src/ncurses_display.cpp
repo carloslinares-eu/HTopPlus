@@ -16,10 +16,10 @@ using std::to_string;
 std::string NCursesDisplay::ProgressBar(float percent) {
     std::string result{"0%"};
     int size{50};
-    float bars{percent * size};
+    float bars{percent * static_cast<float>(size)};
 
     for (int i{0}; i < size; ++i) {
-        result += i <= bars ? '|' : ' ';
+        result += static_cast<float>(i) <= bars ? '|' : ' ';
     }
 
     string display{to_string(percent * 100).substr(0, 4)};
@@ -78,7 +78,7 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process>& processes,
         mvwprintw(window, row, user_column, "%s", processes[i].getUser().c_str());
         float cpu = processes[i].getCpuUtilization() * 100;
         mvwprintw(window, row, cpu_column, "%s", to_string(cpu).substr(0, 4).c_str());
-        mvwprintw(window, row, ram_column, "%s", processes[i].getRamUtilization().c_str());
+        mvwprintw(window, row, ram_column, "%s", (std::to_string(processes[i].getRamUtilization())).c_str());
         mvwprintw(window, row, time_column,
                   "%s", Format::ElapsedTime(processes[i].getUpTime()).c_str());
         mvwprintw(window, row, command_column,
@@ -110,5 +110,4 @@ void NCursesDisplay::DisplayProcesses(std::vector<Process>& processes,
         refresh();
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    endwin();
 }

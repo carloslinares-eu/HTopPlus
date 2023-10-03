@@ -143,7 +143,7 @@ string LinuxParser::Command(int pid) {
     }
 }
 
-string LinuxParser::ProcessUsedRam(const LP::TextFile& kStatusFile) {
+unsigned long LinuxParser::ProcessUsedRam(const LP::TextFile & kStatusFile) {
     long unsigned int process_ram_usage_kb = 0, process_ram_usage_mb;
     unsigned int const kb_in_mb = 1024;
     for (vector<string> line: kStatusFile) {
@@ -156,7 +156,7 @@ string LinuxParser::ProcessUsedRam(const LP::TextFile& kStatusFile) {
         }
     }
     process_ram_usage_mb = process_ram_usage_kb / kb_in_mb;
-    return std::to_string(process_ram_usage_mb);
+    return process_ram_usage_mb;
 }
 
 
@@ -182,7 +182,7 @@ string LinuxParser::User(int pid, const LP::TextFile& kPasswordFileParsed) {
 }
 
 
-long LinuxParser::UpTime(LP::TextFile& kPdiStatFile) {
+long LinuxParser::UpTime(const LP::TextFile & kPdiStatFile) {
     long int active_jiffies = std::stoi(kPdiStatFile[0][21]);
     long int active_time_seconds = active_jiffies / sysconf(_SC_CLK_TCK);
     return active_time_seconds;

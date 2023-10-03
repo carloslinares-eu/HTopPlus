@@ -3,71 +3,49 @@
 #include <utility>
 
 
-Process::Process(int pid, string user) : pid(pid), user(std::move(user)) {}
-
-void Process::getConstantInformation() {
-    user = LP::User(pid, )
+Process::Process(int pid, string user) : pid(pid), user(std::move(user)) {
+    setConstantInformation();
 }
 
-void Process::updateDynamicInformation() {
-    if (process_is_active) {
-        updateCpuUtilization();
-        updateRamUtilization();
-        updateUptime();
-    }
+void Process::setConstantInformation() {
+    setPidPath();
+    setFilesPaths();
+    command = LP::Command(pid);
 }
 
-void OSFiles::ReadPidsFiles() {
-    for (int pid : system_pids) {
-        current_pid = pid;
-
-        current_pid_cmdline_file.clear();
-        current_pid_stat_file.clear();
-        current_pid_status_file.clear();
-
-        getPidPath();
-        getFilesPathInPid();
-        checkIfPdiHasAllFilesNeeded();
-
-        if (pid_has_all_files) {
-            string path_of_current_pid_cmdline_file = files_paths_in_current_pid[needed_files_in_pid::cmdline];
-            string path_of_current_pid_stat_file = files_paths_in_current_pid[needed_files_in_pid::stat];
-            string path_of_current_pid_status_file = files_paths_in_current_pid[needed_files_in_pid::status];
-
-            current_pid_cmdline_file = LP::ReadTextFile(path_of_current_pid_cmdline_file);
-            current_pid_stat_file = LP::ReadTextFile(path_of_current_pid_stat_file);
-            current_pid_status_file = LP::ReadTextFile(path_of_current_pid_status_file);
-
-        }
-
-        LP::PidFiles current_pid_files {current_pid,  pid_has_all_files,
-                                        current_pid_cmdline_file,
-                                        current_pid_stat_file,
-                                        current_pid_status_file};
-
-        all_pids_files.push_back(current_pid_files);
-    }
-}
-void OSFiles::getPidPath() {
-    current_pid_path = LP::kProcDirectory + "/" + std::to_string(current_pid);
+void Process::setPidPath() {
+    pid_path = LP::kProcDirectory + "/" + std::to_string(pid);
 }
 
-void OSFiles::getFilesPathInPid() {
-    files_paths_in_current_pid.clear();
-    files_paths_in_current_pid.push_back(current_pid_path + LP::kCmdlineFilename);
-    files_paths_in_current_pid.push_back(current_pid_path + LP::kStatFilename);
-    files_paths_in_current_pid.push_back(current_pid_path + LP::kStatusFilename);
+void Process::updateDynamicInformation(const long int & cpu_current_usage_increment) {
+    readFiles();
+    updateCpuUtilization(cpu_current_usage_increment);
+    updateRamUtilization();
+    updateUptime();
 }
 
-void OSFiles::checkIfPdiHasAllFilesNeeded() {
-    pid_has_all_files = std::ranges::all_of(files_paths_in_current_pid, [](string& file_path)
-    {return FS::exists(file_path);});
+void Process::readFiles() {
+    files[cmdline] = LP::ReadTextFile(files_paths[cmdline]);
+    files[stat] = LP::ReadTextFile(files_paths[stat]);
+    files[status] = LP::ReadTextFile(files_paths[status]);
 }
 
+void Process::setFilesPaths() {
+    files_paths[cmdline] = pid_path + LP::kCmdlineFilename;
+    files_paths[stat] = pid_path + LP::kStatFilename;
+    files_paths[status] = pid_path + LP::kStatusFilename;
+}
 
-void Process::updateCpuUtilization() {
+//bool Process::allFilesArePresent() {
+//    bool all_files_exist = std::ranges::all_of(files_paths, [](string& file_path)
+//    {return FS::exists(file_path);});
+//    return all_files_exist;
+//}
+
+
+void Process::updateCpuUtilization(const long int & cpu_current_usage_increment) {
     long int current_jiffies_increment;
-    long int latest_cpu_increment = input_info.current_usage_increment;
+    long int latest_cpu_increment = cpu_current_usage_increment;
 
     updateJiffies();
     current_jiffies_increment = sum_current_process_jiffies - sum_previous_process_jiffies;
@@ -78,23 +56,19 @@ void Process::updateCpuUtilization() {
     else {
         cpu_utilization = static_cast<float>(current_jiffies_increment)/static_cast<float>(latest_cpu_increment);
     }
-
     saveJiffiesForNextCycle();
 }
 
 void Process::updateRamUtilization() {
-    LP::TextFile StatusFile = input_info.current_process_files.kPidStatusFile;
-    ram_utilization = LP::ProcessUsedRam(StatusFile);
+    ram_utilization = LP::ProcessUsedRam(files[status]);
 }
 
 void Process::updateUptime() {
-    LP::TextFile StatFile = input_info.current_process_files.kPidStatFile;
-    uptime = LP::UpTime(StatFile);
+    uptime = LP::UpTime(files[stat]);
 }
 
 void Process::updateJiffies() {
-    LP::TextFile StatFile = input_info.current_process_files.kPidStatFile;
-    sum_current_process_jiffies = LP::ActiveJiffiesProcess(StatFile);
+    sum_current_process_jiffies = LP::ActiveJiffiesProcess(files[stat]);
 }
 
 void Process::saveJiffiesForNextCycle() {

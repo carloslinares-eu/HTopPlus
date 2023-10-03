@@ -45,18 +45,18 @@ private:
     vector<int> new_pids;
     vector<int> dead_pids;
 
-    unsigned int number_of_updated_process{};
-    unsigned int number_of_added_process{};
-
+    void UpdateListsOfPids();
     void UpdateListOfCurrentPIDs();
     void UpdateListOfNewPids();
     void UpdateListOfDeadPids();
+
+    void InitProcesses();
+    void UpdateProcesses();
     void RemoveDeadProcesses();
     void UpdateAliveProcesses();
     void GenerateNewProcesses();
     void OrderProcesses();
 
-    bool ProcessIsAlive(Process& input_process);
 };
 
 #endif

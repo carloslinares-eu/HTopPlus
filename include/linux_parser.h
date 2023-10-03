@@ -91,17 +91,12 @@ namespace LinuxParser {
     
     // getSystemProcesses
     string Command(int pid);
-    string ProcessUsedRam(const TextFile& kStatusFile);
+    unsigned long ProcessUsedRam(const TextFile & kStatusFile);
     string Uid(int pid);
-    string User(int pid, const TextFile& kPasswordFile);
-    long int UpTime(TextFile& kPdiStatFile);
+    string User(int pid, const TextFile & kPasswordFile);
+    long int UpTime(const TextFile & kPdiStatFile);
 
-    enum needed_files_in_pid {cmdline = 0,
-        stat = 1,
-        status = 2};
-
-
-};  // namespace LinuxParser
+} // namespace LinuxParser
 
 
 

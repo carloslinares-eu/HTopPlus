@@ -17,53 +17,55 @@ namespace LP = LinuxParser;
 
 class Process {
 public:
-    explicit Process(int pid, string user);
+    Process(int pid, string user);
 
     [[nodiscard]] int getPid() const {return pid;}
     string getUser() {return user;};
     string getCommand() {return command;}
     [[nodiscard]] float getCpuUtilization() const {return cpu_utilization;}
-    string getRamUtilization() {return ram_utilization;}
+    [[nodiscard]] unsigned long getRamUtilization() const {return ram_utilization;}
     [[nodiscard]] long int getUpTime() const {return uptime;}
-
-    void setUser(string input_user){user = std::move(input_user);}
-    void setCommand(string input_command){command = std::move(input_command);}
-    void setCpuUtilization(float const &input_cpu_utilization){cpu_utilization = input_cpu_utilization;}
-    void setRamUtilization(string input_ram_utilization){ram_utilization = std::move(input_ram_utilization);}
-    void setUpTime(long int const &input_uptime){uptime = input_uptime;}
 
     bool operator<(const Process& process2) const  {return this->getCpuUtilization() < process2.getCpuUtilization();}
 
-    void updateDynamicInformation();
+    void updateDynamicInformation(const long int & cpu_current_usage_increment);
 
 private:
     int pid;
 
-    LP::TextFile cmdline_file;
-    LP::TextFile stat_file;
-    LP::TextFile status_file;
+    string pid_path;
 
-    bool process_is_active{};
+    string files_paths[3];
+    LP::TextFile files[3];
 
     string user;
     std::string command;
 
     float cpu_utilization{};
-    string ram_utilization;
+    unsigned long ram_utilization = 999;
     long int uptime{};
 
     long int sum_current_process_jiffies{};
     long int sum_previous_process_jiffies{};
 
-    void updateCpuUtilization();
+    void setPidPath();
+
+    void readFiles();
+    void setFilesPaths();
+
+    void updateCpuUtilization(const long int & current_usage_increment);
     void updateRamUtilization();
     void updateUptime();
     void updateJiffies();
     void saveJiffiesForNextCycle();
 
-    void getConstantInformation();
+    void setConstantInformation();
 
-
+    enum needed_files_in_pid {
+        cmdline = 0,
+        stat = 1,
+        status = 2
+    };
 };
 
 #endif
