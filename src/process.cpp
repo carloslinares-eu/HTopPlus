@@ -1,7 +1,13 @@
 #include "process.h"
 
+#include <utility>
 
-Process::Process(int pid) : pid(pid) {}
+
+Process::Process(int pid, string user) : pid(pid), user(std::move(user)) {}
+
+void Process::getConstantInformation() {
+    user = LP::User(pid, )
+}
 
 void Process::updateDynamicInformation() {
     if (process_is_active) {

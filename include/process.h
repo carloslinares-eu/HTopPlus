@@ -17,7 +17,7 @@ namespace LP = LinuxParser;
 
 class Process {
 public:
-    explicit Process(int pid);
+    explicit Process(int pid, string user);
 
     [[nodiscard]] int getPid() const {return pid;}
     string getUser() {return user;};
@@ -60,6 +60,8 @@ private:
     void updateUptime();
     void updateJiffies();
     void saveJiffiesForNextCycle();
+
+    void getConstantInformation();
 
 
 };

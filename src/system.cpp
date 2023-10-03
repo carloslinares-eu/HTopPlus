@@ -53,16 +53,10 @@ void System::RemoveDeadProcesses() {
 }
 
 void System::GenerateNewProcesses() {
-    processes.clear();
-    for (const LP::PidFiles& current_pid_files : files.getAllPidsFiles()) {
-        LP::ProcessInputInformation current_process_input_information{
-                current_pid_files,
-                files.getPasswordFileParsed(),
-                cpu.getUsageIncrement()
-        };
-        Process new_process(current_process_input_information);
-        new_process.updateDynamicInformation();
-        processes.push_back(new_process);
+    for (auto pid : new_pids) {
+        string user = LP::User(pid, files.getPasswordFileParsed());
+        auto ptr_new_process = new Process(pid, user);
+        processes.push_back(ptr_new_process);
     }
 }
 
