@@ -75,12 +75,6 @@ long int LinuxParser::UpTimeTotal(const LP::TextFile &kUptimeFile) {
     return uptime_total;
 }
 
-[[maybe_unused]] long int LinuxParser::UpTimeEffective(const LP::TextFile &kUptimeFile) {
-    long int uptime_effective;
-    string uptime_effective_s = kUptimeFile[0][1];
-    std::from_chars(uptime_effective_s.data(), uptime_effective_s.data() + uptime_effective_s.size(), uptime_effective);
-    return uptime_effective;
-}
 
 [[maybe_unused]] long LinuxParser::Jiffies(const LP::TextFile &kStatFile) {
     long system_jiffies;

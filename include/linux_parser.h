@@ -47,7 +47,6 @@ namespace LinuxParser {
     long UpTimeTotal(const TextFile& kUptimeFile);
     std::vector<long int> getAggregatedCPUInfo(const TextFile& kStatFile);
     
-        [[maybe_unused]] long UpTimeEffective(const TextFile& kUptimeFile);
     std::vector<int> Pids();
     int TotalProcesses(const TextFile& kStatFile);
     int RunningProcesses(const TextFile& kStatFile);
@@ -56,7 +55,6 @@ namespace LinuxParser {
     TextFile ParsePasswordFile(const TextFile& kPasswordFileRefRaw);
     string OperatingSystem(const TextFile& kOSFileRef);
     
-    // cpu. To be used as index of vector current_cpus_jiffies
     enum CPUStates {
       kUser_ = 0,
       kNice_ = 1,
