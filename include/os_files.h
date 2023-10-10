@@ -41,5 +41,4 @@ private:
 
 };
 
-
-#endif //MONITOR_OS_FILES_H
+#endif

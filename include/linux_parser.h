@@ -28,7 +28,7 @@ namespace fs = std::filesystem;
 
 namespace LinuxParser {
     typedef  vector<vector<string>> TextFile;
-    // Paths
+
     const string kProcDirectory{"/proc"};
     const string kCmdlineFilename{"/cmdline"};
     const string kCpuInfoFilename{"/cpuinfo"};
@@ -40,7 +40,6 @@ namespace LinuxParser {
     const string kOSPath{"/etc/os-release"};
     const string kPasswordPath{"/etc/passwd"};
     
-    // System
     int TotalMemory(const TextFile& kMemInfoFile);
     int AvailableMemory(const TextFile& kMemInfoFile);
     float MemoryUtilization(const TextFile& kMemInfoFile);
@@ -68,34 +67,18 @@ namespace LinuxParser {
       kGuestNice_ = 9
     };
     
-    // processes
-    std::vector<string> CpuUtilization();
-    
-        [[maybe_unused]] [[maybe_unused]] long Jiffies(const TextFile& kStatFile);
     long ActiveJiffiesProcess(const TextFile& kStatFile);
-    long ActiveJiffies(const TextFile& kStatFile);
-    long IdleJiffies(const TextFile& kStatFile);
     
-    
-    
-    // General functions
     TextFile ReadTextFile(const string& file_path);
     vector<string> ReadLine(const string& line);
-    TextFile ReplaceAllInstancesInFile (const TextFile& input_file,
-                                                      const string& to_find,
-                                                      const string& to_replace_with);
-    bool isInteger(const string& input_string);
     string lastFolderInPath(const fs::path &input_path);
     
-    // getSystemProcesses
     string Command(int pid);
     unsigned long ProcessUsedRam(const TextFile & kStatusFile);
     string Uid(int pid);
     string User(int pid, const TextFile & kPasswordFile);
     long int UpTime(const TextFile & kPdiStatFile);
 
-} // namespace LinuxParser
-
-
+}
 
 #endif

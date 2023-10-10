@@ -36,13 +36,6 @@ void Process::setFilesPaths() {
     files_paths[status] = pid_path + LP::kStatusFilename;
 }
 
-//bool Process::allFilesArePresent() {
-//    bool all_files_exist = std::ranges::all_of(files_paths, [](string& file_path)
-//    {return FS::exists(file_path);});
-//    return all_files_exist;
-//}
-
-
 void Process::updateCpuUtilization(const long int & cpu_current_usage_increment) {
     long int current_jiffies_increment;
     long int latest_cpu_increment = cpu_current_usage_increment;

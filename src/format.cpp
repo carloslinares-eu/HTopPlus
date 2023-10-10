@@ -4,11 +4,7 @@
 
 using std::string;
 
-// INPUT: Long int measuring seconds
-// OUTPUT: HH:MM:SS
-// REMOVE: [[maybe_unused]] once you define the function
 string Format::ElapsedTime(long seconds) {
-    // The seconds assigned will be subtracted in seconds_left_to_divide
     long seconds_left_to_divide = seconds;
     string formatted_time;
     const int seconds_in_hour = 3600;

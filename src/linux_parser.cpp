@@ -76,14 +76,6 @@ long int LinuxParser::UpTimeTotal(const LP::TextFile &kUptimeFile) {
 }
 
 
-[[maybe_unused]] long LinuxParser::Jiffies(const LP::TextFile &kStatFile) {
-    long system_jiffies;
-    string user = kStatFile[0][1];
-    system_jiffies = std::stol(user);
-    return system_jiffies;
-}
-
-
 std::vector<long int> LinuxParser::getAggregatedCPUInfo(const LP::TextFile &kStatFile) {
     std::vector<long int> all_cpus_jiffies;
     for (const string &jiffies_value: kStatFile[0]) {
@@ -257,17 +249,6 @@ LP::TextFile LinuxParser::ParsePasswordFile(const LP::TextFile &kPasswordFileRef
         parsed_pass_file.push_back(parsed_os_line);
     }
     return parsed_pass_file;
-}
-
-bool LinuxParser::isInteger(const std::string &input_string) {
-    try {
-        size_t pos;
-        return pos == input_string.size();
-    } catch (const std::invalid_argument&) {
-        return false;
-    } catch (const std::out_of_range&) {
-        return false;
-    }
 }
 
 string LinuxParser::lastFolderInPath(const fs::path &input_path) {
